@@ -34,13 +34,13 @@ const VideoPlayerListByteArk = ({ url, day_number, video_number, selectedVDO, la
     if (video) {
       if (Hls.isSupported()) {
         const hls = new Hls();
-        hls.loadSource(selectedVDO.url3); // ใช้ URL ที่ถูกส่งเข้ามาใน props
+        hls.loadSource(selectedVDO.url); // ใช้ URL ที่ถูกส่งเข้ามาใน props
         hls.attachMedia(video);
         hls.on(Hls.Events.MANIFEST_PARSED, () => {
           video.play();
         });
       } else if (video.canPlayType('application/vnd.apple.mpegurl')) {
-        video.src = selectedVDO.url3; // ใช้ URL ที่ถูกส่งเข้ามาใน props
+        video.src = selectedVDO.url; // ใช้ URL ที่ถูกส่งเข้ามาใน props
         video.addEventListener('canplay', () => {
           video.play();
         });
