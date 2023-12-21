@@ -612,25 +612,7 @@ class ImportMembers extends Component {
 
             <h1 className="mb-5">เพิ่มสมาชิก</h1>
 
-            <div className="mb-2">
-              <h5>เลือกประเภทของผู้ใช้:</h5>
-              <input
-                id='member_type2'
-                type="radio"
-                value="normal"
-                checked={member_type2 === 'normal'}
-                onChange={(event) => this.handleChange(event)}
-              />
-              <label className="ml-2" style={{ color: (member_type2 === 'normal') ? 'orange' : 'black', fontSize: (member_type2 === 'normal') ? 24 : 16 }}> ทั่วไป</label><br></br>
-              <input
-                id='member_type2'
-                type="radio"
-                value='low_impact'
-                checked={member_type2 === 'low_impact'}
-                onChange={(event) => this.handleChange(event)}
-              />
-              <label className="ml-2" style={{ color: (member_type2 === 'low_impact') ? 'orange' : 'black', fontSize: (member_type2 === 'low_impact') ? 24 : 16 }}> Low impact</label><br></br>
-            </div>
+            
 
             <label for="fname">Email: </label>
             <input type="text" id="email" name="email" value={this.state.email} onChange={(event) => this.handleChange(event)} /><br></br>
@@ -638,10 +620,7 @@ class ImportMembers extends Component {
             <input type="text" id="fullname" name="fullname" value={this.state.fullname} onChange={(event) => this.handleChange(event)} /><br></br>
             <label for="fname">Phone: </label>
             <input type="text" id="phone" name="phone" value={this.state.phone} onChange={(event) => this.handleChange(event)} /><br></br>
-            <label for="fname">Facebook: </label>
-            <input type="text" id="facebook" name="facebook" value={this.state.facebook} onChange={(event) => this.handleChange(event)} /><br></br>
-            <label for="fname">fb_group: </label>
-            <input type="text" id="fb_group" name="fb_group" value={this.state.fb_group} onChange={(event) => this.handleChange(event)} /><br></br>
+            
             <section>
               <div style={{ float: "left" }} className="mr-5">
                 <label style={{ display: "block" }} className="h5">วันเริ่มต้น</label>
@@ -744,22 +723,19 @@ class ImportMembers extends Component {
                 <td style={{ border: '1px solid black', width: 100 }}><h5><b>{"email"}</b></h5></td>
                 <td style={{ border: '1px solid black', width: 100 }}><h5><b>{"full_name"}</b></h5></td>
                 <td style={{ border: '1px solid black', width: 100 }}><h5><b>{"phone"}</b></h5></td>
-                <td style={{ border: '1px solid black', width: 100 }}><h5><b>{"facebook"}</b></h5></td>
-                <td style={{ border: '1px solid black', width: 100 }}><h5><b>{"fb_group"}</b></h5></td>
+
               </tr>
               <tr style={{ border: '1px solid black', textAlign: 'center' }}>
                 <td style={{ border: '1px solid black', width: 100 }}><h6>{"xxxxxxxx"}</h6></td>
                 <td style={{ border: '1px solid black', width: 100 }}><h6>{"xxxx xxxx"}</h6></td>
                 <td style={{ border: '1px solid black', width: 100 }}><h6>{"xxxxxxxx"}</h6></td>
-                <td style={{ border: '1px solid black', width: 100 }}><h6>{"xxxx xxxx"}</h6></td>
-                <td style={{ border: '1px solid black', width: 100 }}><h6>{"xxx"}</h6></td>
+
               </tr>
               <tr style={{ border: '1px solid black', textAlign: 'center' }}>
                 <td style={{ border: '1px solid black', width: 100 }}><h6>{"xxxxxxxx"}</h6></td>
                 <td style={{ border: '1px solid black', width: 100 }}><h6>{"xxxx xxxx"}</h6></td>
                 <td style={{ border: '1px solid black', width: 100 }}><h6>{"xxxxxxxx"}</h6></td>
-                <td style={{ border: '1px solid black', width: 100 }}><h6>{"xxxx xxxx"}</h6></td>
-                <td style={{ border: '1px solid black', width: 100 }}><h6>{"xxx"}</h6></td>
+
               </tr>
             </table>
 
@@ -801,25 +777,7 @@ class ImportMembers extends Component {
               }
             </div>
 
-            <div className="mb-2">
-              <h5>เลือกประเภทของผู้ใช้:</h5>
-              <input
-                id='member_type'
-                type="radio"
-                value="normal"
-                checked={member_type === 'normal'}
-                onChange={(event) => this.handleChange(event)}
-              />
-              <label className="ml-2" style={{ color: (member_type === 'normal') ? 'orange' : 'black', fontSize: (member_type === 'normal') ? 24 : 16 }}> ทั่วไป</label><br></br>
-              <input
-                id='member_type'
-                type="radio"
-                value='low_impact'
-                checked={member_type === 'low_impact'}
-                onChange={(event) => this.handleChange(event)}
-              />
-              <label className="ml-2" style={{ color: (member_type === 'low_impact') ? 'orange' : 'black', fontSize: (member_type === 'low_impact') ? 24 : 16 }}> Low impact</label><br></br>
-            </div>
+            
 
             <section>
               <div style={{ float: "left" }} className="mr-5">
@@ -916,9 +874,7 @@ class ImportMembers extends Component {
           <div className="mr-4 mb-3" style={{ cursor: "pointer" }}>
             <a className="" onClick={() => this.setState({ selectedRenderPage: "renderBodyInfo", email: "" })} style={{}}>BodyInfo</a>
           </div>
-          <div className="mr-4 mb-3" style={{ cursor: "pointer" }}>
-            <a className="" onClick={() => this.setState({ selectedRenderPage: "renderMemberEventLog", email: "" })} style={{}}>MemberEventLog</a>
-          </div>
+   
         </div>
         {(selectedRenderPage === "renderImportMembers") && this.renderImportMembers()}
         {(selectedRenderPage === "renderImportMembers") && this.renderAddMember()}
