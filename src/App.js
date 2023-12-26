@@ -9,31 +9,25 @@ import {
 import { connect } from "react-redux";
 import { logoutUser } from "./redux/auth";
 import { clearVideoList } from "./redux/exerciseVideos";
-import { clearChallenges } from "./redux/challenges"
+/* import { clearChallenges } from "./redux/challenges" */
 import { checkQuestionnaireLog, checkNewsLog } from "./redux/get"
 import { insertQuestionnaireLog, insertNewsLog } from "./redux/update"
 
 /* import bgintro from "./assets/img/bgintro.png"; */
 
 import Login from "./views/login";
-import Register from "./views/register";
-import ForgotPassword from "./views/forgotPassword";
 import VideoList from "./views/videoList";
 import VideoList2 from "./views/videoList2";
-import Platform from "./views/platform";
-import Package from "./views/package";
 import ImportMembers from "./views/importMembers";
-import Challenges from "./views/challenges";
+/* import Challenges from "./views/challenges"; */
 import Dashboard from "./views/dashboard";
+import Footer from "./views/footer";
 import TestGPS from "./views/test_gps";
-import TestGPS_GG from "./views/test_gps_gg";
 import TestGPS_Permission from "./views/test_gps_permission";
-import BonusChallenge from "./views/bonus_challenge";
+/* import BonusChallenge from "./views/bonus_challenge"; */
 
 import { awsConfig } from "./constants/defaultValues";
 
-import ReactGa from 'react-ga';
-import { locale } from "moment";
 import { calculateWeekInProgram } from "./helpers/utils";
 
 Amplify.configure(awsConfig);
@@ -96,7 +90,7 @@ class App extends Component {
   onUserLogout(event) {
     this.props.logoutUser();
     this.props.clearVideoList();
-    this.props.clearChallenges();
+    /* this.props.clearChallenges(); */
     this.props.history.push('/platform');
   }
 
@@ -107,10 +101,9 @@ class App extends Component {
       week = calculateWeekInProgram(user.start_date);
     }
     return (
-      <nav className="navbar navbar-expand" style={{ backgroundColor: "#F45197", fontFamily: "'Prompt', sans-serif" }}>
-        <div style={{ color: "white", position: "absolute",left: 20, bottom: 0, fontSize: 12}}>(updated: 29-11-2023)</div>
-        <a className="navbar-brand" href="/#" onClick={() => this.props.history.push('/')} style={{ color: "white", cursor: "pointer" }}>
-          <img className="mr-3" src="/assets/img/logo_g3.png" alt="" />
+      <nav className="navbar navbar-expand" style={{ backgroundColor: "white", fontFamily: "'Prompt', sans-serif" }}>
+        <a className="navbar-brand" href="/#" onClick={() => this.props.history.push('/')} style={{ color: "#F45197", cursor: "pointer" }}>
+          <img className="mr-3" width={100} height={33} src="/assets/img/logo_g3.png" alt="" />
         </a>
         <div className="collapse navbar-collapse justify-content-start" id="navbarNav">
           <ul className="navbar-nav">
@@ -161,7 +154,7 @@ class App extends Component {
             {
               (this.props.user !== null) &&
               <li className="nav-item">
-                <a className="nav-link" href="/#" onClick={() => this.onUserLogout()} style={{ color: "white", cursor: "pointer" }}>
+                <a className="nav-link" href="/#" onClick={() => this.onUserLogout()} style={{ color: "#EF60A3", cursor: "pointer" }}>
                   ออกจากระบบ
                 </a>
               </li>
@@ -225,12 +218,12 @@ class App extends Component {
     return (
       <div className="header">
 
-        <div className="popupIntroVDO" id={`popupIntroVDO`}>
+        {/* <div className="popupIntroVDO" id={`popupIntroVDO`}>
           <video src={'https://player.vimeo.com/external/414645540.hd.mp4?s=d2c95abe8443336f858f4bf9243b79fee350a8d4&profile_id=174'} id="introVDO" controls controlsList="nodownload" disablePictureInPicture ></video>
           <img alt="" src="./assets/img/thumb/close.png" className="close" onClick={() => this.closeToggle('popupIntroVDO')}></img>
-        </div>
+        </div> */}
 
-        {
+        {/* {
           overlay &&
           <div
             className="overlayPopupQuestionnaire"
@@ -245,7 +238,12 @@ class App extends Component {
             id="overlayPopupNews"
             onClick={() => this.closeToggle('popupNews')}
           />
-        }
+        } */}
+        <div className="d-inline-block">
+        <span style={{fontSize:"82px", color:"#000", fontWeight:"300"}}>7 DAY WITH </span>
+        <span style={{fontSize:"82px", color:"#000"}}>PILATES RING</span>
+        </div>
+        
         <div className="popupQuestionnaire" id={`popupQuestionnaire`}>
           <div style={{ display: "block" }}>
             <h3 ><b>*แบบประเมินความพึงพอใจและประเมินผลการทำตามโปรแกรม*</b></h3>
@@ -266,18 +264,6 @@ class App extends Component {
             <img src={`../assets/img/news1.jpg`} width="90%" />
           </div>
           <img alt="" src="./assets/img/thumb/close.png" className="close" onClick={() => this.closeToggle('popupNews')}></img>
-        </div>
-
-
-        <div className="watch_introduction">
-          <div
-            onClick={() => this.toggle('popupIntroVDO')}
-            className=""
-            style={{ float: "left" }}
-            aria-hidden="true">
-            <img className="mr-2" src={`../assets/img/play_button.png`} width="54px" height="54px" />
-            WATCH INTRODUCTION
-          </div>
         </div>
       </div>
     )
@@ -300,18 +286,20 @@ class App extends Component {
           {/* <Route path='/register' component={Register} />
           <Route path='/forgot-password' component={ForgotPassword} /> */}
           <Route path='/import-Members' component={ImportMembers} />
-          <Route path='/Challenges' component={Challenges} />
+          {/* <Route path='/Challenges' component={Challenges} /> */}
           <Route path='/Dashboard' component={Dashboard} />
           <Route path='/VideoList' component={VideoList} />
           <Route path='/VideoList2' component={VideoList2} />
-          <Route path='/BonusChallenge' component={BonusChallenge} />
+          {/* <Route path='/BonusChallenge' component={BonusChallenge} /> */}
           {/* <Route path='/platform' component={Platform} />
           <Route path='/package' component={Package} /> */}
           <Route path='*'>
             <Redirect to="/login" />
           </Route>
         </Switch>
+        <Footer />
       </div>
+      
     );
   }
 }
@@ -327,7 +315,7 @@ const mapStateToProps = ({ authUser, exerciseVideos, get, update }) => {
 const mapActionsToProps = {
   logoutUser,
   clearVideoList,
-  clearChallenges,
+  /* clearChallenges, */
   checkQuestionnaireLog,
   insertQuestionnaireLog,
   checkNewsLog,

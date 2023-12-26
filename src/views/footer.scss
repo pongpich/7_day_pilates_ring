@@ -1,0 +1,182 @@
+@font-face {
+    font-family: "LightPynk";
+    font-style: normal;
+    font-weight: normal;
+    src: url(../fonts/fontsPynk/NotoSansThai-Light.ttf);
+  }
+  
+  @font-face {
+    font-family: "ThinPynk";
+    src: url(../fonts/fontsPynk/NotoSansThai-Thin.ttf);
+  }
+  
+  @font-face {
+    font-family: "RegularPynk";
+    src: url(../fonts/fontsPynk/NotoSansThai-Regular.ttf);
+  }
+  
+  @font-face {
+    font-family: "MediumPynk";
+    src: url(../fonts/fontsPynk/NotoSansThai-Medium.ttf);
+  }
+  
+  @font-face {
+    font-family: "SemiBoldPynk";
+    src: url(../fonts/fontsPynk/NotoSansThai-SemiBold.ttf);
+  }
+  
+  @font-face {
+    font-family: "BoldPynk";
+    src: url(../fonts/fontsPynk/NotoSansThai-Bold.ttf);
+  }
+  
+  @media screen and (max-width: 576px) {
+    .flex_center {
+      height: 520px;
+    }
+  }
+  
+  @media screen and (min-width: 577px) {
+    .flex_center {
+      height: 700px;
+    }
+  }
+  
+  @media screen and (max-width: 320px) {
+    #image-section {
+      width: 100%;
+      height: auto;
+    }
+  }
+  
+  @media screen and (max-width: 576px) {
+    .bbpf-company {
+      font-size: 20px !important;
+    }
+  
+    .bbpf-address {
+      font-size: 15px !important;
+    }
+  
+    .contact-us {
+      font-size: 16px !important;
+    }
+  
+    .center-content-icon {
+      justify-content: left !important;
+    }
+  
+    .bbpf-rights {
+      font-size: 6px !important;
+    }
+  
+    .hr-height {
+      margin-left: 8px !important;
+      margin-right: 8px !important;
+    }
+  }
+  
+  @media screen and (max-width: 768px) {
+    .footer-background {
+      padding: 135px 0px 106px 5% !important;
+    }
+  
+    .hr_class {
+      margin-right: 25px !important;
+    }
+  }
+  
+  .footer-background {
+    padding: 135px 5% 106px 5%;
+    background-color: #fd1081;
+    color: var(--white);
+  }
+  
+  .bbpf-company {
+    font-size: 32px;
+    font-family: MediumPynk;
+  }
+  
+  .bbpf-address {
+    font-size: 20px;
+    font-family: RegularPynk;
+  }
+  
+  .contact-us {
+    font-size: 22px;
+    font-family: SemiBoldPynk;
+  }
+  
+  .center-content-icon {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    height: 100%;
+  }
+  
+  .footer {
+    padding: 60px;
+    text-align: center;
+    display: block;
+    justify-content: center;
+    align-items: center;
+    margin: auto;
+    width: 80%;
+  }
+  
+  .hr_class {
+    background-color: white;
+    height: 2px;
+    margin-right: 80px;
+  }
+  
+  .img-icon {
+    width: 32px;
+    height: 32px;
+    margin-right: 12px;
+  }
+  
+  .box-bbpf-rights {
+    margin-top: 63px;
+    flex-direction: row;
+    display: flex;
+    flex-wrap: wrap;
+    width: 100%;
+  }
+  
+  .hr-height {
+    background-color: white;
+    height: 20px;
+    width: 1px;
+    margin-left: 16px;
+    margin-right: 16px;
+  }
+  
+  .bbpf-rights {
+    font-size: 12px;
+    font-family: SemiBoldPynk;
+  }
+  
+  .LightPynk {
+    font-family: "LightPynk";
+  }
+  
+  .ThinPynk {
+    font-family: "ThinPynk";
+  }
+  
+  .RegularPynk {
+    font-family: "RegularPynk";
+  }
+  
+  .MediumPynk {
+    font-family: "MediumPynk";
+  }
+  
+  .SemiBoldPynk {
+    font-family: "SemiBoldPynk";
+  }
+  
+  .BoldPynk {
+    font-family: "BoldPynk";
+  }
