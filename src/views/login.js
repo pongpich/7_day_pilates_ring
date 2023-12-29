@@ -100,15 +100,16 @@ class Login extends Component {
                 {"เข้าสู่ระบบ"}
               </CardTitle>
               <Form>
-                <Label className="form-group2 has-float-label mb-4">
-                  {"Email"}
-                  <Input
-                    type="email"
-                    id="email"
-                    value={this.state.email}
-                    onChange={(event) => this.handleChange(event)}
-                  />
-                </Label>
+
+                <h4>Email</h4>
+                <Input
+                  type="email"
+                  id="email"
+                  value={this.state.email}
+                  onChange={(event) => this.handleChange(event)}
+                  className="mb-3"
+                />
+
                 {statusLogin === "fail" &&
                   !(this.props.status === "success") && (
                     <small id="emailHelp" className="form-text text-muted mb-3">
