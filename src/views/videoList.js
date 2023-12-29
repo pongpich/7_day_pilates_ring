@@ -60,6 +60,7 @@ import VideoPlayerByteArk from "../components/VideoPlayer";
 import VideoPlayerListByteArk from "../components/VideoPlayerList";
 import SelectChangeVideoList from "../components/SelectChangeVideoList";
 import VideoListLastWeekAll from "../components/VideoListLastWeekAll";
+import { localeOptions } from "../constants/defaultValues";
 
 class VideoList extends Component {
   constructor(props) {
@@ -106,6 +107,8 @@ class VideoList extends Component {
       weekAll: [],
       selectExerciseVideoLastWeek: null,
       showBarveAndBurn: false,
+      showImage: false,
+      numImage: "0",
     };
 
     this.prevPlayTime = 0;
@@ -668,10 +671,21 @@ class VideoList extends Component {
   };
 
   onDayChange = (day) => {
-    this.setState({
-      focusDay: day,
-      showBarveAndBurn: false,
-    });
+    if (day === 1 || day === 3 || day === 5 || day === 6) {
+      this.setState({
+        focusDay: day,
+        showBarveAndBurn: false,
+        showImage: true,
+        numImage: day,
+      });
+    } else {
+      this.setState({
+        focusDay: day,
+        showBarveAndBurn: false,
+        showImage: false,
+        numImage: day,
+      });
+    }
   };
 
   onUserLogout(event) {
@@ -1959,6 +1973,8 @@ class VideoList extends Component {
       lastWeekStart,
       selectExerciseVideoLastWeek,
       showBarveAndBurn,
+      showImage,
+      numImage
     } = this.state;
 
     const { exerciseVideo } = this.props;
@@ -2038,10 +2054,8 @@ class VideoList extends Component {
                             ? "3px solid #F45197"
                             : "none"
                         }`,
-                        color:`${
-                          !showBarveAndBurn && focusDay === 0
-                          ? "#000"
-                          : "grey"
+                        color: `${
+                          !showBarveAndBurn && focusDay === 0 ? "#000" : "grey"
                         }`,
                         cursor: "pointer",
                         padding: "0",
@@ -2056,159 +2070,147 @@ class VideoList extends Component {
                 )}
                 {numbDayExercise >= 2 && (
                   <div>
-                  <a
-                    className="nav-link"
-                    style={{
-                      borderBottom: `${
-                        !showBarveAndBurn && focusDay === 1
-                          ? "3px solid #F45197"
-                          : "none"
-                      }`,
-                      color:`${
-                        !showBarveAndBurn && focusDay === 1
-                        ? "#000"
-                        : "grey"
-                      }`,
-                      cursor: "pointer",
-                      padding: "0",
-                    }}
-                    onClick={() => this.onDayChange(1)}
-                  >
-                    <h5 style={{ padding: "0px 10px" }}>
-                      <b>DAY 2</b>
-                    </h5>
-                  </a>
-                </div>
+                    <a
+                      className="nav-link"
+                      style={{
+                        borderBottom: `${
+                          !showBarveAndBurn && focusDay === 1
+                            ? "3px solid #F45197"
+                            : "none"
+                        }`,
+                        color: `${
+                          !showBarveAndBurn && focusDay === 1 ? "#000" : "grey"
+                        }`,
+                        cursor: "pointer",
+                        padding: "0",
+                      }}
+                      onClick={() => this.onDayChange(1)}
+                    >
+                      <h5 style={{ padding: "0px 10px" }}>
+                        <b>DAY 2</b>
+                      </h5>
+                    </a>
+                  </div>
                 )}
                 {numbDayExercise >= 3 && (
                   <div>
-                  <a
-                    className="nav-link"
-                    style={{
-                      borderBottom: `${
-                        !showBarveAndBurn && focusDay === 2
-                          ? "3px solid #F45197"
-                          : "none"
-                      }`,
-                      color:`${
-                        !showBarveAndBurn && focusDay === 2
-                        ? "black"
-                        : "grey"
-                      }`,
-                      cursor: "pointer",
-                      padding: "0",
-                    }}
-                    onClick={() => this.onDayChange(2)}
-                  >
-                    <h5 style={{ padding: "0px 10px" }}>
-                      <b>DAY 3</b>
-                    </h5>
-                  </a>
-                </div>
+                    <a
+                      className="nav-link"
+                      style={{
+                        borderBottom: `${
+                          !showBarveAndBurn && focusDay === 2
+                            ? "3px solid #F45197"
+                            : "none"
+                        }`,
+                        color: `${
+                          !showBarveAndBurn && focusDay === 2 ? "black" : "grey"
+                        }`,
+                        cursor: "pointer",
+                        padding: "0",
+                      }}
+                      onClick={() => this.onDayChange(2)}
+                    >
+                      <h5 style={{ padding: "0px 10px" }}>
+                        <b>DAY 3</b>
+                      </h5>
+                    </a>
+                  </div>
                 )}
                 {numbDayExercise >= 4 && (
                   <div>
-                  <a
-                    className="nav-link"
-                    style={{
-                      borderBottom: `${
-                        !showBarveAndBurn && focusDay === 3
-                          ? "3px solid #F45197"
-                          : "none"
-                      }`,
-                      color:`${
-                        !showBarveAndBurn && focusDay === 3
-                        ? "black"
-                        : "grey"
-                      }`,
-                      cursor: "pointer",
-                      padding: "0",
-                    }}
-                    onClick={() => this.onDayChange(3)}
-                  >
-                    <h5 style={{ padding: "0px 10px" }}>
-                      <b>DAY 4</b>
-                    </h5>
-                  </a>
-                </div>
+                    <a
+                      className="nav-link"
+                      style={{
+                        borderBottom: `${
+                          !showBarveAndBurn && focusDay === 3
+                            ? "3px solid #F45197"
+                            : "none"
+                        }`,
+                        color: `${
+                          !showBarveAndBurn && focusDay === 3 ? "black" : "grey"
+                        }`,
+                        cursor: "pointer",
+                        padding: "0",
+                      }}
+                      onClick={() => this.onDayChange(3)}
+                    >
+                      <h5 style={{ padding: "0px 10px" }}>
+                        <b>DAY 4</b>
+                      </h5>
+                    </a>
+                  </div>
                 )}
                 {numbDayExercise >= 5 && (
                   <div>
-                  <a
-                    className="nav-link"
-                    style={{
-                      borderBottom: `${
-                        !showBarveAndBurn && focusDay === 4
-                          ? "3px solid #F45197"
-                          : "none"
-                      }`,
-                      color:`${
-                        !showBarveAndBurn && focusDay === 4
-                        ? "black"
-                        : "grey"
-                      }`,
-                      cursor: "pointer",
-                      padding: "0",
-                    }}
-                    onClick={() => this.onDayChange(4)}
-                  >
-                    <h5 style={{ padding: "0px 10px" }}>
-                      <b>DAY 5</b>
-                    </h5>
-                  </a>
-                </div>
+                    <a
+                      className="nav-link"
+                      style={{
+                        borderBottom: `${
+                          !showBarveAndBurn && focusDay === 4
+                            ? "3px solid #F45197"
+                            : "none"
+                        }`,
+                        color: `${
+                          !showBarveAndBurn && focusDay === 4 ? "black" : "grey"
+                        }`,
+                        cursor: "pointer",
+                        padding: "0",
+                      }}
+                      onClick={() => this.onDayChange(4)}
+                    >
+                      <h5 style={{ padding: "0px 10px" }}>
+                        <b>DAY 5</b>
+                      </h5>
+                    </a>
+                  </div>
                 )}
                 {numbDayExercise >= 6 && (
                   <div>
-                  <a
-                    className="nav-link"
-                    style={{
-                      borderBottom: `${
-                        !showBarveAndBurn && focusDay === 5
-                          ? "3px solid #F45197"
-                          : "none"
-                      }`,
-                      color:`${
-                        !showBarveAndBurn && focusDay === 5
-                        ? "black"
-                        : "grey"
-                      }`,
-                      cursor: "pointer",
-                      padding: "0",
-                    }}
-                    onClick={() => this.onDayChange(5)}
-                  >
-                    <h5 style={{ padding: "0px 10px" }}>
-                      <b>DAY 6</b>
-                    </h5>
-                  </a>
-                </div>
+                    <a
+                      className="nav-link"
+                      style={{
+                        borderBottom: `${
+                          !showBarveAndBurn && focusDay === 5
+                            ? "3px solid #F45197"
+                            : "none"
+                        }`,
+                        color: `${
+                          !showBarveAndBurn && focusDay === 5 ? "black" : "grey"
+                        }`,
+                        cursor: "pointer",
+                        padding: "0",
+                      }}
+                      onClick={() => this.onDayChange(5)}
+                    >
+                      <h5 style={{ padding: "0px 10px" }}>
+                        <b>DAY 6</b>
+                      </h5>
+                    </a>
+                  </div>
                 )}
                 {numbDayExercise >= 7 && (
                   <div>
-                  <a
-                    className="nav-link"
-                    style={{
-                      borderBottom: `${
-                        !showBarveAndBurn && focusDay === 6
-                          ? "3px solid #F45197"
-                          : "none"
-                      }`,
-                      color:`${
-                        !showBarveAndBurn && focusDay === 6
-                        ? "black"
-                        : "grey"
-                      }`,
-                      cursor: "pointer",
-                      padding: "0",
-                    }}
-                    onClick={() => this.onDayChange(6)}
-                  >
-                    <h5 style={{ padding: "0px 10px" }}>
-                      <b>DAY 7</b>
-                    </h5>
-                  </a>
-                </div>
+                    <a
+                      className="nav-link"
+                      style={{
+                        borderBottom: `${
+                          !showBarveAndBurn && focusDay === 6
+                            ? "3px solid #F45197"
+                            : "none"
+                        }`,
+                        color: `${
+                          !showBarveAndBurn && focusDay === 6 ? "black" : "grey"
+                        }`,
+                        cursor: "pointer",
+                        padding: "0",
+                      }}
+                      onClick={() => this.onDayChange(6)}
+                    >
+                      <h5 style={{ padding: "0px 10px" }}>
+                        <b>DAY 7</b>
+                      </h5>
+                    </a>
+                  </div>
                 )}
               </nav>
             </div>
@@ -2301,9 +2303,9 @@ class VideoList extends Component {
               </div>
             )}
 
-            {showBarveAndBurn ? (
+            {showImage ? (
               <div>
-                <BraveAndBurn></BraveAndBurn>
+                <img src={`../assets/img/day${numImage + 1}.jpg`} alt="" width={1295} height={600}/>
               </div>
             ) : (
               <table className="table table-responsive">
