@@ -57,8 +57,18 @@ export const types = {
   UPDATE_VIDEO_STATUS_BRAVE_AND_BURN_FAIL: "UPDATE_VIDEO_STATUS_BRAVE_AND_BURN_FAIL",
   UPDATE_FB_SHARE_STATUS_BRAVE_AND_BURN: "UPDATE_FB_SHARE_STATUS_BRAVE_AND_BURN",
   UPDATE_FB_SHARE_STATUS_BRAVE_AND_BURN_SUCCESS: "UPDATE_FB_SHARE_STATUS_BRAVE_AND_BURN_SUCCESS",
-  UPDATE_FB_SHARE_STATUS_BRAVE_AND_BURN_FAIL: "UPDATE_FB_SHARE_STATUS_BRAVE_AND_BURN_FAIL"
+  UPDATE_FB_SHARE_STATUS_BRAVE_AND_BURN_FAIL: "UPDATE_FB_SHARE_STATUS_BRAVE_AND_BURN_FAIL",
+  SHOW_POPUP_OPTION_VIDEO: "SHOW_POPUP_OPTION_VIDEO",
+  HIDE_POPUP_OPTION_VIDEO: "HIDE_POPUP_OPTION_VIDEO",
 }
+
+export const hidePopupOptionVideo = () => ({
+  type: types.HIDE_POPUP_OPTION_VIDEO
+});
+
+export const showPopupOptionVideo = () => ({
+  type: types.SHOW_POPUP_OPTION_VIDEO
+});
 
 export const updateFbShareStatusBraveAndBurn = (user_id) => ({
   type: types.UPDATE_FB_SHARE_STATUS_BRAVE_AND_BURN,
@@ -1373,7 +1383,8 @@ const INIT_STATE = {
   statusGetBraveAndBurn: "default",
   brave_and_burn_challenge: null,
   status_update_video_brave_and_burn: "default",
-  status_update_fb_brave_and_burn: "default"
+  status_update_fb_brave_and_burn: "default",
+  showPopupOptionVideo: false
 };
 
 export function reducer(state = INIT_STATE, action) {
@@ -1558,6 +1569,16 @@ export function reducer(state = INIT_STATE, action) {
       return {
         ...state,
         bodyInfo: action.payload
+      };
+    case types.SHOW_POPUP_OPTION_VIDEO:
+      return {
+        ...state,
+        showPopupOptionVideo: true
+      };
+    case types.HIDE_POPUP_OPTION_VIDEO:
+      return {
+        ...state,
+        showPopupOptionVideo: false
       };
     case types.RESET_STATUS:
       return {

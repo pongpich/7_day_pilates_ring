@@ -1,7 +1,7 @@
 import React, { useRef, useEffect, useState } from 'react';
 import Hls from 'hls.js';
 import { useSelector, useDispatch } from "react-redux";
-import { hidePopupVideoPlayer, updatePlaytime, updatePlaytimeLastWeek, updatePlaytimeLastWeekSelected } from "../redux/exerciseVideos";
+import { hidePopupVideoPlayer, updatePlaytime, updatePlaytimeLastWeek, updatePlaytimeLastWeekSelected, showPopupOptionVideo, hidePopupOptionVideo } from "../redux/exerciseVideos";
 import { completeVideoPlayPercentage, minimumVideoPlayPercentage, updateFrequency } from "../constants/defaultValues";
 
 
@@ -70,6 +70,13 @@ const VideoPlayerByteArk = ({ url, day_number, video_number, selectedVDO, lastWe
     const diffTime = Math.abs(videoCurrDuration - prevPlayTime);
     if (diffTime < updateFrequency) { return }
     setPrevPlayTime(videoCurrDuration)
+
+    //เช็คว่า Video สุดท้ายของ main_video ในวันนั้นถูกเล่นจบ ให้โชว์ showPopupOptionVideo
+    if ((selectedVDO.video_id === "cool_down") && (videoCurrDuration / videoDuration >= 0.99)) {
+      dispatch(showPopupOptionVideo())
+    } else {
+      dispatch(hidePopupOptionVideo())
+    }
 
     //เช็คว่าถ้าดูวีดีโอยังไม่ถึง minimumVideoPlayPercentage ไม่ต้อง updatePlayTime
     //เช็คว่าถ้าเคยดูคลิปนั้นจบแล้ว ไม่ต้อง updatePlayTime

@@ -110,7 +110,7 @@ class VideoList extends Component {
       showBarveAndBurn: false,
       showImage: false,
       numImage: "0",
-      showPopupOptionVideo: true
+      showPopupOptionVideo: false
     };
 
     this.prevPlayTime = 0;
@@ -233,7 +233,15 @@ class VideoList extends Component {
       hidePopUpVideoPlayerList,
       endedVideoPlayerList,
       statusGetBraveAndBurn,
+      showPopupOptionVideo
     } = this.props;
+
+
+    if (
+      (prevProps.showPopupOptionVideo !== showPopupOptionVideo) && (showPopupOptionVideo)
+    ) {
+      this.setState({ showPopupOptionVideo: true });
+    }
 
     if (
       prevProps.statusGetBraveAndBurn !== statusGetBraveAndBurn &&
@@ -3053,6 +3061,7 @@ const mapStateToProps = ({
     statusCreateBraveAndBurn,
     statusGetBraveAndBurn,
     brave_and_burn_challenge,
+    showPopupOptionVideo
   } = exerciseVideos;
   return {
     user,
@@ -3085,6 +3094,7 @@ const mapStateToProps = ({
     statusCreateBraveAndBurn,
     statusGetBraveAndBurn,
     brave_and_burn_challenge,
+    showPopupOptionVideo
   };
 };
 
