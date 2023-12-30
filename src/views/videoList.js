@@ -56,6 +56,7 @@ import {
 import "./videoList.scss";
 import moment from "moment";
 import BraveAndBurn from "../components/BraveAndBurn";
+import VideoPlayerNoPopup from "../components/VideoPlayerNoPopup";
 import VideoPlayerByteArk from "../components/VideoPlayer";
 import VideoPlayerListByteArk from "../components/VideoPlayerList";
 import SelectChangeVideoList from "../components/SelectChangeVideoList";
@@ -109,7 +110,7 @@ class VideoList extends Component {
       showBarveAndBurn: false,
       showImage: false,
       numImage: "0",
-
+      showPopupOptionVideo: true
     };
 
     this.prevPlayTime = 0;
@@ -618,7 +619,6 @@ class VideoList extends Component {
 
   exerciseDaySelection(focusDay) {
     if (this.props.exerciseVideo) {
-      console.log("test :", this.props.exerciseVideo[focusDay]);
 
       // เริ่มต้นโดยการสร้างออบเจกต์สำหรับข้อมูลแยกแยะ
       const separatedData = {
@@ -641,7 +641,6 @@ class VideoList extends Component {
 
   exerciseDaySelectionOptionVideo(focusDay) {
     if (this.props.exerciseVideo) {
-      console.log("test :", this.props.exerciseVideo[focusDay]);
 
       // เริ่มต้นโดยการสร้างออบเจกต์สำหรับข้อมูลแยกแยะ
       const separatedData = {
@@ -2689,14 +2688,6 @@ class VideoList extends Component {
                                     alt=""
                                   />
                                 )}
-                                {/* <div className="overlay" onClick={() => this.toggle(item)}>
-                                <i className="fa fa-play fa-4x" aria-hidden="true"></i>
-                                <div className="videoDuration" style={{ position: "absolute", right: "5%", bottom: "0", color: "white" }}>
-                                  <h6>
-                                    <b>{(item.duration + "").split(".")[0]}:{(item.duration + "").split(".")[1]} นาที</b>
-                                  </h6>
-                                </div>
-                              </div> */}
                               </div>
                             </div>
                             <div className="videoDetail">
@@ -2856,7 +2847,24 @@ class VideoList extends Component {
     );
   }
 
-  renderPopupDailyWeighChallenge() {
+  renderPopupOptionVideo() {
+    const {
+      focusDay,
+      selectedVDO,
+      selectVideoPlayer,
+      lastWeekVDO_click,
+      lastWeekVDOAll,
+      lastWeekStart,
+      selectExerciseVideoLastWeek,
+      showBarveAndBurn,
+      showImage,
+      numImage
+    } = this.state;
+
+    const videoUrl = selectedVDO && selectedVDO.url ? `${selectedVDO.url}` : "";
+    const todayExerciseOption = this.exerciseDaySelectionOptionVideo(focusDay);
+    const todayExerciseOptionIndex0 = todayExerciseOption[0];
+
     return (
       <div>
         <div
@@ -2870,51 +2878,51 @@ class VideoList extends Component {
           style={{ borderRadius: "25px" }}
         >
           <br></br>
-          <center>
-            <h5 className="mt-1 mb-3" style={{ color: "#F45197" }}>
-              <b>กรุณากรอกน้ำหนักปัจจุบันของคุณ</b>
-            </h5>
-          </center>
+          <h4 className="mt-1 mb-3" >
+            <b>เลือกฝึกเพิ่มเติม</b>
+          </h4>
+
           <div class="input-group mb-4">
-            <input
-              type="number"
-              className="form-control"
-              style={{ textAlign: "right" }}
-              id="weightInDailyWeighChallenge"
-              value={this.state.weightInDailyWeighChallenge}
-              onChange={(event) => this.handleChange(event)}
+            <VideoPlayerNoPopup
+              url={todayExerciseOptionIndex0 && todayExerciseOptionIndex0.url}
+              day_number={focusDay}
+              video_number={todayExerciseOptionIndex0 && todayExerciseOptionIndex0.order}
+              selectedVDO={todayExerciseOptionIndex0}
+              lastWeekVDO_click={lastWeekVDO_click}
+              lastWeekVDOAll={lastWeekVDOAll}
+              lastWeekStart={lastWeekStart}
+              selectExerciseVideoLastWeek={selectExerciseVideoLastWeek}
             />
-            <span className="input-group-text" style={{ color: "#F45197" }}>
-              KG
-            </span>
           </div>
+
+          <h5 className="mb-3">
+            {`Sub circuit KOL = ${todayExerciseOptionIndex0.coach}`}
+          </h5>
+
           {this.props.statusPostDailyWeighChallenge !== "loading" ? (
             <div className="row">
               <div className="col-1"></div>
               <button
                 type="button"
+                className="btn btn-danger col-4"
+                style={{ backgroundColor: "#F45197" }}
+                onClick={() => this.toggle(todayExerciseOptionIndex0)}
+              >
+                เล่นเลย
+              </button>
+              <div className="col-2"></div>
+              <button
+                type="button"
                 className="btn col-4"
                 onClick={() => this.closePopupDailyWeighChallenge()}
+
                 style={{
                   backgroundColor: "white",
                   color: "#F45197",
                   borderColor: "#F45197",
                 }}
               >
-                ปิด
-              </button>
-              <div className="col-2"></div>
-              <button
-                type="button"
-                className="btn btn-danger col-4"
-                onClick={() =>
-                  this.submitDailyWeighChallenge(
-                    this.state.weightInDailyWeighChallenge
-                  )
-                }
-                style={{ backgroundColor: "#F45197" }}
-              >
-                ยืนยัน
+                ยกเลิก
               </button>
               <div className="col-1"></div>
             </div>
@@ -2948,6 +2956,7 @@ class VideoList extends Component {
       lastWeekVDO_click,
       step4WeeksPrompt,
       lastWeekVDOAll,
+      showPopupOptionVideo
     } = this.state;
     const {
       user,
@@ -2961,9 +2970,7 @@ class VideoList extends Component {
 
     return (
       <div>
-        {dailyWeighChallenge &&
-          this.props.user &&
-          this.renderPopupDailyWeighChallenge()}
+        {showPopupOptionVideo && this.renderPopupOptionVideo()}
 
         {/* <div className="nav mt-5 mb-4 ml-5" id="myTab" role="tablist">
           <div className="mr-4 mb-3">
