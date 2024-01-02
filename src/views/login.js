@@ -78,7 +78,7 @@ class Login extends Component {
               <div className="description">
                 <h6 className="mb-3">
                   <center>
-                    <b>ยินต้อนรับเข้าสู่โปรแกรม</b>
+                    <b>ยินดีต้อนรับเข้าสู่โปรแกรม</b>
                   </center>
                 </h6>
                 <h3>

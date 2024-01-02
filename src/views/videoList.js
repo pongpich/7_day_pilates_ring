@@ -1108,8 +1108,6 @@ class VideoList extends Component {
               <h2 className="mb-4" style={{ color: "#F45197" }}>
                 <b>เพื่อเริ่มต้นการใช้งาน</b>
               </h2>
-              <h5>การกรอกข้อมูลจะทำให้เราสามารถออกแบบ</h5>
-              <h5>โปรแกรมออกกำลังกายให้เหมาะสมกับคุณได้ดียิ่งขึ้น</h5>
             </center>
           </div>
           <div className="col-lg-8 offset-lg-2 col-md-8 offset-md-2 col-12">
@@ -1339,8 +1337,7 @@ class VideoList extends Component {
             <h2 className="mb-4" style={{ color: "#F45197" }}>
               <b>เพื่อเริ่มต้นการใช้งาน</b>
             </h2>
-            <h5>การกรอกข้อมูลจะทำให้เราสามารถออกแบบ</h5>
-            <h5>โปรแกรมออกกำลังกายให้เหมาะสมกับคุณได้ดียิ่งขึ้น</h5>
+            <h5>กรุณาใช้หน่วยวัดเป็น “นิ้ว” (Inches)</h5>
             <hr></hr>
           </center>
           <div
@@ -1521,9 +1518,9 @@ class VideoList extends Component {
               <h2 className="mt-5 mb-4" style={{ color: "#F45197" }}>
                 <b>สรุปรายละเอียด</b>
               </h2>
-              <h5>กรุณาตรวจสอบข้อมูลอีกครั้งเพื่อที่คุณจะได้รับประสบการณ์</h5>
+              <h5>กรุณาตรวจสอบความถูกต้องของข้อมูลอีกครั้งก่อนกดยืนยัน</h5>
               <h5>
-                โปรแกรมการออกกำลังกายสำหรับคุณโดยเฉพาะ/อย่างแม่นยำ/อย่างถูกต้อง
+                ใช้หน่วยวัดสัดส่วนเป็น “นิ้ว” (Inches)
               </h5>
             </center>
           </div>
@@ -2646,7 +2643,7 @@ class VideoList extends Component {
             )
               :
               <div style={{ marginTop: "5rem" }}>
-                <h4 style={{ marginLeft: "5rem" }}>เลือกฝึกเพิ่มเติม</h4>
+                <h4 style={{ marginLeft: "5rem" }}>ฝึกเพิ่มเติม</h4>
                 {this.props.exerciseVideo &&
                   todayExerciseOption.map((item, index) => {
                     const minuteLabel =
