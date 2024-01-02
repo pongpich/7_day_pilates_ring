@@ -27,8 +27,8 @@ class ImportMembers extends Component {
       phone: "",
       facebook: "",
       fb_group: 404,
-      member_type: "normal",
-      member_type2: "normal",
+      member_type: "จินนี่",
+      member_type2: "จินนี่",
       import_type: "import_members",
       editMemberType: false,
       editProgramLevel: false,
@@ -125,7 +125,7 @@ class ImportMembers extends Component {
       statusSubmitImportMembers: "default"
     })
 
-    if (member_type === "low_impact") {
+    if (member_type === "ลิตา") {
       this.togglePopupConfirmLowimp(); //สั่งปิด popup ConfirmLowimp
     }
 
@@ -161,7 +161,7 @@ class ImportMembers extends Component {
       }
     ];
 
-    if (member_type2 === "low_impact") {
+    if (member_type2 === "ลิตา") {
       this.togglePopupConfirmLowimp(); //สั่งปิด popup ConfirmLowimp
     }
 
@@ -243,8 +243,8 @@ class ImportMembers extends Component {
         <div className="popupConfirmLowimp" id="popupConfirmLowimp" style={{ marginTop: "10%" }}>
           <center>
             <h2 style={{ color: "red" }}>แน่ใจหรือไม่ ?</h2>
-            <h2>คุณกำลังเลือก Import ผู้ใช้เป็นกลุ่ม</h2>
-            <h2 style={{ color: "orange" }}>"Low impact"</h2>
+            <h2>คุณกำลังเลือก Import ผู้ใช้เป็น KOL</h2>
+            <h2 style={{ color: "orange" }}>"ลิตา (โยคะ)"</h2>
           </center>
           <center style={{ display: "flex", justifyContent: "space-around", marginTop: 30 }}>
             <button
@@ -612,7 +612,25 @@ class ImportMembers extends Component {
 
             <h1 className="mb-5">เพิ่มสมาชิก</h1>
 
-            
+            <div className="mb-2">
+              <h5>เลือก KOL:</h5>
+              <input
+                id='member_type2'
+                type="radio"
+                value="จินนี่"
+                checked={member_type2 === 'จินนี่'}
+                onChange={(event) => this.handleChange(event)}
+              />
+              <label className="ml-2" style={{ color: (member_type2 === 'จินนี่') ? 'orange' : 'black', fontSize: (member_type2 === 'จินนี่') ? 24 : 16 }}> จินนี่ (เวทเทรนนิ่ง)</label><br></br>
+              <input
+                id='member_type2'
+                type="radio"
+                value='ลิตา'
+                checked={member_type2 === 'ลิตา'}
+                onChange={(event) => this.handleChange(event)}
+              />
+              <label className="ml-2" style={{ color: (member_type2 === 'ลิตา') ? 'orange' : 'black', fontSize: (member_type2 === 'ลิตา') ? 24 : 16 }}> ลิตา (โยคะ)</label><br></br>
+            </div>
 
             <label for="fname">Email: </label>
             <input type="text" id="email" name="email" value={this.state.email} onChange={(event) => this.handleChange(event)} /><br></br>
@@ -620,7 +638,8 @@ class ImportMembers extends Component {
             <input type="text" id="fullname" name="fullname" value={this.state.fullname} onChange={(event) => this.handleChange(event)} /><br></br>
             <label for="fname">Phone: </label>
             <input type="text" id="phone" name="phone" value={this.state.phone} onChange={(event) => this.handleChange(event)} /><br></br>
-            
+            <label for="fname">Facebook: </label>
+            <input type="text" id="facebook" name="facebook" value={this.state.facebook} onChange={(event) => this.handleChange(event)} /><br></br>
             <section>
               <div style={{ float: "left" }} className="mr-5">
                 <label style={{ display: "block" }} className="h5">วันเริ่มต้น</label>
@@ -723,19 +742,19 @@ class ImportMembers extends Component {
                 <td style={{ border: '1px solid black', width: 100 }}><h5><b>{"email"}</b></h5></td>
                 <td style={{ border: '1px solid black', width: 100 }}><h5><b>{"full_name"}</b></h5></td>
                 <td style={{ border: '1px solid black', width: 100 }}><h5><b>{"phone"}</b></h5></td>
-
+                <td style={{ border: '1px solid black', width: 100 }}><h5><b>{"facebook"}</b></h5></td>
               </tr>
               <tr style={{ border: '1px solid black', textAlign: 'center' }}>
                 <td style={{ border: '1px solid black', width: 100 }}><h6>{"xxxxxxxx"}</h6></td>
                 <td style={{ border: '1px solid black', width: 100 }}><h6>{"xxxx xxxx"}</h6></td>
                 <td style={{ border: '1px solid black', width: 100 }}><h6>{"xxxxxxxx"}</h6></td>
-
+                <td style={{ border: '1px solid black', width: 100 }}><h6>{"xxxx xxxx"}</h6></td>
               </tr>
               <tr style={{ border: '1px solid black', textAlign: 'center' }}>
                 <td style={{ border: '1px solid black', width: 100 }}><h6>{"xxxxxxxx"}</h6></td>
                 <td style={{ border: '1px solid black', width: 100 }}><h6>{"xxxx xxxx"}</h6></td>
                 <td style={{ border: '1px solid black', width: 100 }}><h6>{"xxxxxxxx"}</h6></td>
-
+                <td style={{ border: '1px solid black', width: 100 }}><h6>{"xxxx xxxx"}</h6></td>
               </tr>
             </table>
 
@@ -777,7 +796,25 @@ class ImportMembers extends Component {
               }
             </div>
 
-            
+            <div className="mb-2">
+              <h5>เลือก KOL:</h5>
+              <input
+                id='member_type'
+                type="radio"
+                value="จินนี่"
+                checked={member_type === 'จินนี่'}
+                onChange={(event) => this.handleChange(event)}
+              />
+              <label className="ml-2" style={{ color: (member_type === 'จินนี่') ? 'orange' : 'black', fontSize: (member_type === 'จินนี่') ? 24 : 16 }}> จินนี่ (เวทเทรนนิ่ง)</label><br></br>
+              <input
+                id='member_type'
+                type="radio"
+                value='ลิตา'
+                checked={member_type === 'ลิตา'}
+                onChange={(event) => this.handleChange(event)}
+              />
+              <label className="ml-2" style={{ color: (member_type === 'ลิตา') ? 'orange' : 'black', fontSize: (member_type === 'ลิตา') ? 24 : 16 }}> ลิตา (โยคะ)</label><br></br>
+            </div>
 
             <section>
               <div style={{ float: "left" }} className="mr-5">
@@ -832,7 +869,7 @@ class ImportMembers extends Component {
           ยกเลิก
         </button>
         {
-          (member_type === 'low_impact') ?
+          (member_type === 'ลิตา') ?
             <button
               type="button"
               className="btn btn-success col-lg-1 col-md-6 "
@@ -868,13 +905,15 @@ class ImportMembers extends Component {
           <div className="mr-4 mb-3" style={{ cursor: "pointer" }}>
             <a className="" onClick={() => this.setState({ selectedRenderPage: "renderDeleteProgramInWeek", email: "" })} style={{}}>ProgramInWeek</a>
           </div>
-          <div className="mr-4 mb-3" style={{ cursor: "pointer" }}>
+          {/* <div className="mr-4 mb-3" style={{ cursor: "pointer" }}>
             <a className="" onClick={() => this.setState({ selectedRenderPage: "renderMemberInfo", email: "" })} style={{}}>ข้อมูลผู้ใช้</a>
-          </div>
+          </div> */}
           <div className="mr-4 mb-3" style={{ cursor: "pointer" }}>
             <a className="" onClick={() => this.setState({ selectedRenderPage: "renderBodyInfo", email: "" })} style={{}}>BodyInfo</a>
           </div>
-   
+         {/*  <div className="mr-4 mb-3" style={{ cursor: "pointer" }}>
+            <a className="" onClick={() => this.setState({ selectedRenderPage: "renderMemberEventLog", email: "" })} style={{}}>MemberEventLog</a>
+          </div> */}
         </div>
         {(selectedRenderPage === "renderImportMembers") && this.renderImportMembers()}
         {(selectedRenderPage === "renderImportMembers") && this.renderAddMember()}
