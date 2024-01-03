@@ -53,7 +53,7 @@ export default function footer() {
           <div style={{ textAlign: "left" }}>
             <p className="contact-us">Social Media</p>
             <hr className="hr_class" />
-            <div className="row">
+            <div className="d-inline-block">
               <img src={fb} className="img-icon" alt=""/>
               <img src={instagram} className="img-icon" alt=""/>
               <img src={te} className="img-icon" alt=""/>

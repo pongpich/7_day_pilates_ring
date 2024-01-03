@@ -69,24 +69,16 @@ class Login extends Component {
     const { statusLogin } = this.state;
     return (
       <div className="all-row-login">
-        <div className="row container">
+        <div className="row container justify-content-center">
           <div
-            className="auth-card shadow col-lg-10 offset-lg-1 col-md-12 col-12"
+            className="auth-card shadow col-lg-10 offset-lg-1 col-md-8 col-12"
             style={{ borderRadius: "25px" }}
           >
-            <div className="position-relative image-side-login col-lg-6 col-12">
+            <div className="position-relative image-side-login mt-3 col-lg-6 col-12">
               <div className="description">
-                <h6 className="mb-3">
-                  <center>
-                    <b>ยินดีต้อนรับเข้าสู่โปรแกรม</b>
-                  </center>
-                </h6>
-                <h3>
-                  <center>7 DAY WITH</center>
-                </h3>
-                <h3>
-                  <center>PILATES RING</center>
-                </h3>
+                <p className="text-welcome">ยินต้อนรับเข้าสู่โปรแกรม</p>
+                <p className="text-7-day">7 DAY WITH</p>
+                <p className="text-pilates-ring">PILATES RING</p>
               </div>
               <img
                 className="mb-4 mt-3 col-12"
