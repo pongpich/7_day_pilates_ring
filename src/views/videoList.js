@@ -2013,6 +2013,8 @@ class VideoList extends Component {
       showImage,
       numImage,
     } = this.state;
+    const userExpireDate = new Date(this.props.user.expire_date).getTime();
+    const currentDate = new Date().getTime(); //currentDate > userExpired คือหมดอายุ
 
     const { exerciseVideo } = this.props;
     const numbDayExercise = exerciseVideo.length;
@@ -2450,9 +2452,12 @@ class VideoList extends Component {
                           <div className="mt-3 mb-1 col-lg-8 col-md-11 col-10">
                             <div className="videoItem border shadow">
                               {
-                                (this.state.dayOfWeek === focusDay) ||
+                                (
+                                  (this.state.dayOfWeek === focusDay) ||
                                   !((item.play_time && item.duration) &&
-                                    item.play_time / item.duration >= completeVideoPlayPercentage) ?
+                                    item.play_time / item.duration >= completeVideoPlayPercentage) ||
+                                  (currentDate < userExpireDate)
+                                ) ?
 
                                   (this.state.autoPlayCheck) ?
                                     (
@@ -2968,15 +2973,6 @@ class VideoList extends Component {
       statusGetCheckRenewPrompt,
     } = this.props;
 
-    const userExpired = this.props.user.expire_date;
-    const currentDate = new Date();
-
-    if (currentDate > userExpired) {
-      console.log('ผู้ใช้หมดอายุแล้ว');
-    } else {
-      console.log('ผู้ใช้ยังไม่หมดอายุ');
-    }
-
     return (
       <div>
         {showPopupOptionVideo && this.renderPopupOptionVideo()}
@@ -3009,10 +3005,7 @@ class VideoList extends Component {
               {this.props.user &&
                 this.props.user.other_attributes &&
                 this.props.statusVideoList !== "no_video"
-                ? !(currentDate > userExpired) ?
-                  this.renderVideoList()
-                  :
-                  this.renderExpired()
+                ? this.renderVideoList()
                 : statusGetCheck4WeeksPrompt !== "loading" &&
                 statusGetCheckRenewPrompt !== "loading" &&
                 ((statusCheck4WeeksPrompt || statusCheckRenewPrompt) &&
