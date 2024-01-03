@@ -14,7 +14,7 @@ export default function footer() {
       className="footer-background" /*  style={{ backgroundImage: `url(${home2})`, backgroundSize: '500px 500px', }}  */
     >
       <div className="row  justify-content-md-center">
-        <div class="col-12 col-md-4" style={{ textAlign: "left" }}>
+        <div className="col-12 col-md-4" style={{ textAlign: "left" }}>
           <img
             src={pinklogo}
             style={{
@@ -23,6 +23,7 @@ export default function footer() {
               width: "100%",
               height: "auth",
             }}
+            alt=""
           />
           <p className="bbpf-company">บริษัท บีบีพีเอฟ จำกัด (สำนักงานใหญ่)</p>
           <p className="bbpf-address">
@@ -30,32 +31,33 @@ export default function footer() {
             10150
           </p>
         </div>
-        <div class="col-12 col-md-4 center-content-icon">
+        <div className="col-12 col-md-4 center-content-icon">
           <div style={{ textAlign: "left" }}>
             <p className="contact-us">ติดต่อเรา</p>
             <hr className="hr_class" />
             <p className="bbpf-address ">
-              <img src={phonelogo} style={{ marginRight: "5px" }} />
+              <img src={phonelogo} style={{ marginRight: "5px" }} alt="" />
               093-883-2339
             </p>
             <p className="bbpf-address">
               <img
                 src={emaillogo}
                 style={{ width: "5%", marginRight: "5px" }}
+                alt=""
               />
               contact@pynk.co
             </p>
           </div>
         </div>
-        <div class="col-12 col-md-4 center-content-icon">
+        <div className="col-12 col-md-4 center-content-icon">
           <div style={{ textAlign: "left" }}>
             <p className="contact-us">Social Media</p>
             <hr className="hr_class" />
             <div className="row">
-              <img src={fb} className="img-icon" />
-              <img src={instagram} className="img-icon" />
-              <img src={te} className="img-icon" />
-              <img src={line} className="img-icon" />
+              <img src={fb} className="img-icon" alt=""/>
+              <img src={instagram} className="img-icon" alt=""/>
+              <img src={te} className="img-icon" alt=""/>
+              <img src={line} className="img-icon" alt=""/>
             </div>
           </div>
         </div>
