@@ -111,7 +111,7 @@ class VideoList extends Component {
       showImage: false,
       numImage: "0",
       showPopupOptionVideo: false,
-      dayOfWeek: ((new Date().getDay() - 1) + 7) % 7
+      dayOfWeek: (new Date().getDay() + 6) % 7
     };
 
     this.prevPlayTime = 0;
