@@ -40,6 +40,7 @@ class App extends Component {
       statusNews: "default",
       overlay: false,
       overlay2: false,
+      showPopupIntro: false
     }
   }
 
@@ -182,8 +183,9 @@ class App extends Component {
   toggle(popupName) {
     if (popupName === "popupIntroVDO") {
       document.getElementById("popupIntroVDO").classList.toggle("active");
-      var video = document.getElementById(`introVDO`);
-      video.play();
+      this.setState({
+        showPopupIntro: true
+      })
     }
     if (popupName === "popupQuestionnaire") {
       document.getElementById("popupQuestionnaire").classList.toggle("active");
@@ -200,9 +202,9 @@ class App extends Component {
   closeToggle(popupName) {
     if (popupName === "popupIntroVDO") {
       document.getElementById("popupIntroVDO").classList.toggle("active");
-      var video = document.getElementById(`introVDO`);
-      video.pause();
-      video.currentTime = 0;
+      this.setState({
+        showPopupIntro: false
+      })
     }
     if (popupName === "popupQuestionnaire") {
       document.getElementById("popupQuestionnaire").classList.toggle("active");
@@ -214,36 +216,23 @@ class App extends Component {
   }
 
   renderHeader() {
-    const { overlay, overlay2 } = this.state;
+    const { showPopupIntro } = this.state;
     return (
       <div className="header">
 
-        {/* <div className="popupIntroVDO" id={`popupIntroVDO`}>
-          <video src={'https://player.vimeo.com/external/414645540.hd.mp4?s=d2c95abe8443336f858f4bf9243b79fee350a8d4&profile_id=174'} id="introVDO" controls controlsList="nodownload" disablePictureInPicture ></video>
+        <div className="popupIntroVDO" id={`popupIntroVDO`}>
           <img alt="" src="./assets/img/thumb/close.png" className="close" onClick={() => this.closeToggle('popupIntroVDO')}></img>
-        </div> */}
-
-        {/* {
-          overlay &&
-          <div
-            className="overlayPopupQuestionnaire"
-            id="overlayPopupQuestionnaire"
-            onClick={() => this.closeToggle('popupQuestionnaire')}
-          />
-        }
-        {
-          overlay2 &&
-          <div
-            className="overlayPopupNews"
-            id="overlayPopupNews"
-            onClick={() => this.closeToggle('popupNews')}
-          />
-        } */}
-        <div className="d-inline-block">
-        <span style={{fontSize:"82px", color:"#000", fontWeight:"300"}}>7 DAY WITH </span>
-        <span style={{fontSize:"82px", color:"#000"}}>PILATES RING</span>
+          {
+            showPopupIntro &&
+            <iframe src="https://stream-player.byteark.com/players/6540b05c1524da29c9b6843b/videos/U09zpJ9vzD7a" width="560" height="320" frameborder="0" allowfullscreen referrerpolicy="origin"></iframe>
+          }
         </div>
-        
+
+        <div className="d-inline-block">
+          <span style={{ fontSize: "82px", color: "#000", fontWeight: "300" }}>7 DAY WITH </span>
+          <span style={{ fontSize: "82px", color: "#000" }}>PILATES RING</span>
+        </div>
+
         <div className="popupQuestionnaire" id={`popupQuestionnaire`}>
           <div style={{ display: "block" }}>
             <h3 ><b>*แบบประเมินความพึงพอใจและประเมินผลการทำตามโปรแกรม*</b></h3>
@@ -264,6 +253,17 @@ class App extends Component {
             <img src={`../assets/img/news1.jpg`} width="90%" />
           </div>
           <img alt="" src="./assets/img/thumb/close.png" className="close" onClick={() => this.closeToggle('popupNews')}></img>
+        </div>
+
+        <div className="watch_introduction">
+          <div
+            onClick={() => this.toggle('popupIntroVDO')}
+            className=""
+            style={{ float: "left" }}
+            aria-hidden="true">
+            <img className="mr-2" src={`../assets/img/play_button.png`} width="54px" height="54px" />
+            WATCH INTRODUCTION
+          </div>
         </div>
       </div>
     )
@@ -299,7 +299,7 @@ class App extends Component {
         </Switch>
         <Footer />
       </div>
-      
+
     );
   }
 }

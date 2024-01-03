@@ -6,6 +6,8 @@
   background-repeat: no-repeat;
   background-size: cover;
   color: #F45197;
+  display: flex;
+  flex-direction: column;
 }
 .watch_introduction {
   font-size: 18px; 
@@ -27,7 +29,6 @@
 
 @media (max-width: 450px) {
   .header {
-    background-image: url("./assets/img/bgintro2_sm.png");
     background-size: 100% 100%;
   }
   .watch_introduction {
