@@ -76,7 +76,7 @@ class App extends Component {
 
     if ((prevProps.statusGetCheckNewsLog !== statusGetCheckNewsLog) && (statusGetCheckNewsLog === 'success')) {
       if (!statusCheckNewsLog) {
-        this.toggle('popupNews');
+        //this.toggle('popupNews'); เอาออกเพราะเว็บนี้ไม่มีตัวดูวีดีโอสำรอง
       }
     }
 
