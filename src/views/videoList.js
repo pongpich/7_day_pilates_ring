@@ -3665,7 +3665,7 @@ class VideoList extends Component {
 
     return (
       <div>
-        {true && this.renderPopupOptionVideo()}
+        {showPopupOptionVideo && this.renderPopupOptionVideo()}
 
         {/* <div className="nav mt-5 mb-4 ml-5" id="myTab" role="tablist">
           <div className="mr-4 mb-3">
