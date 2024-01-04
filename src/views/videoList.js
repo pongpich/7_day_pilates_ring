@@ -3538,10 +3538,26 @@ class VideoList extends Component {
           id="popupDailyWeighChallenge"
           style={{ borderRadius: "25px" }}
         >
+          <h4 className="mt-1 mb-3">
+            <center>
+              <b>
+                ยินดีด้วย คุณออกกำลังกายสำเร็จแล้ว!
+              </b>
+            </center>
+          </h4>
+          <h4 className="mt-1 mb-3">
+            <center>
+              <b>
+                คุณต้องการท้าทายไปกับการฝึกเพิ่มเติมในอีกรูปแบบหรือไม่
+              </b>
+            </center>
+          </h4>
           <br></br>
           <h4 className="mt-1 mb-3">
             <b>ฝึกเพิ่มเติม</b>
           </h4>
+
+
 
           <div className="input-group mb-4">
             <VideoPlayerNoPopup
@@ -3649,7 +3665,7 @@ class VideoList extends Component {
 
     return (
       <div>
-        {showPopupOptionVideo && this.renderPopupOptionVideo()}
+        {true && this.renderPopupOptionVideo()}
 
         {/* <div className="nav mt-5 mb-4 ml-5" id="myTab" role="tablist">
           <div className="mr-4 mb-3">
