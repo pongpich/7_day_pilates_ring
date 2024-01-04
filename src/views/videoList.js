@@ -271,13 +271,15 @@ class VideoList extends Component {
       if (hidePopUpVideoPlayer) {
         this.toggle();
 
-        this.setState({ trigerOptionVideo: false })
+        this.setState({ trigerOptionVideo: false, selectedVDO: null })
       }
     }
     //เช็คเพื่อซ่อน popup จากไฟล์ component VideoPlayerList
     if (prevProps.hidePopUpVideoPlayerList !== hidePopUpVideoPlayerList) {
       if (hidePopUpVideoPlayerList) {
         this.closeList();
+
+        this.setState({ trigerOptionVideo: false, selectedVDO: null })
       }
     }
 

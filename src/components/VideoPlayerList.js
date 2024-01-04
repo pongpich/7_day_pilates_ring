@@ -8,11 +8,11 @@ import { completeVideoPlayPercentage, minimumVideoPlayPercentage, updateFrequenc
 const VideoPlayerListByteArk = ({ url, day_number, video_number, selectedVDO, lastWeekVDO_click, lastWeekVDOAll, lastWeekStart, selectExerciseVideoLastWeek }) => {
 
   const dispatch = useDispatch();
-  const hidePopUpVideoPlayer = useSelector(({ exerciseVideos }) => (exerciseVideos ? exerciseVideos.hidePopUpVideoPlayer : ""));
   const exerciseVideo = useSelector(({ exerciseVideos }) => (exerciseVideos ? exerciseVideos.exerciseVideo : ""));
   const all_exercise_activity = useSelector(({ exerciseVideos }) => (exerciseVideos ? exerciseVideos.all_exercise_activity : ""));
   const exerciseVideoLastWeek = useSelector(({ exerciseVideos }) => (exerciseVideos ? exerciseVideos.exerciseVideoLastWeek : ""));
   const endedVideoPlayerList = useSelector(({ exerciseVideos }) => (exerciseVideos ? exerciseVideos.endedVideoPlayerList : ""));
+  const statusAutoPlayCheck = useSelector(({ exerciseVideos }) => (exerciseVideos ? exerciseVideos.statusAutoPlayCheck : ""));
   const user = useSelector(({ authUser }) => (authUser ? authUser.user : ""));
   const videoRef = useRef(null);
   const [videoEnded, setVideoEnded] = useState(false); // เพิ่ม state สำหรับตรวจสอบว่าวีดีโอถูกดูจบหรือไม่
@@ -38,6 +38,7 @@ const VideoPlayerListByteArk = ({ url, day_number, video_number, selectedVDO, la
         hls.attachMedia(video);
         hls.on(Hls.Events.MANIFEST_PARSED, () => {
           video.play();
+
         });
       } else if (video.canPlayType('application/vnd.apple.mpegurl')) {
         video.src = selectedVDO.url; // ใช้ URL ที่ถูกส่งเข้ามาใน props
