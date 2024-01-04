@@ -229,8 +229,8 @@ class App extends Component {
         </div>
 
         <div className="d-inline-block">
-          <span style={{ fontSize: "82px", color: "#000", fontWeight: "300" }}>7 DAY WITH </span>
-          <span style={{ fontSize: "82px", color: "#000" }}>PILATES RING</span>
+          <span className="text-header">7 DAY WITH </span>
+          <span className="text-header" style={{fontWeight:"bold" }}>PILATES RING</span>
         </div>
 
         <div className="popupQuestionnaire" id={`popupQuestionnaire`}>

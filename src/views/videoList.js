@@ -111,7 +111,7 @@ class VideoList extends Component {
       showImage: false,
       numImage: "0",
       showPopupOptionVideo: false,
-      dayOfWeek: (new Date().getDay() + 6) % 7
+      dayOfWeek: (new Date().getDay() + 6) % 7,
     };
 
     this.prevPlayTime = 0;
@@ -129,7 +129,7 @@ class VideoList extends Component {
   }
 
   selectExerciseDaySelectionLastWeek(focusDay) {
-    const { selectExerciseVideoLastWeek } = this.state
+    const { selectExerciseVideoLastWeek } = this.state;
     if (selectExerciseVideoLastWeek) {
       return selectExerciseVideoLastWeek[focusDay];
     }
@@ -362,7 +362,7 @@ class VideoList extends Component {
     }
     if (
       prevProps.statusPostDailyWeighChallenge !==
-      statusPostDailyWeighChallenge &&
+        statusPostDailyWeighChallenge &&
       statusPostDailyWeighChallenge === "success"
     ) {
       this.props.history.push("/challenges");
@@ -917,7 +917,7 @@ class VideoList extends Component {
       !video.duration ||
       video.currentTime / video.duration < minimumVideoPlayPercentage ||
       selectedVDO.play_time / selectedVDO.duration >=
-      completeVideoPlayPercentage
+        completeVideoPlayPercentage
     ) {
       return;
     }
@@ -1901,17 +1901,17 @@ class VideoList extends Component {
                 onClick={
                   step4WeeksPrompt < 3
                     ? () =>
-                      this.setState({
-                        step4WeeksPrompt: step4WeeksPrompt + 1,
-                      })
+                        this.setState({
+                          step4WeeksPrompt: step4WeeksPrompt + 1,
+                        })
                     : () =>
-                      this.props.updateProgramPromptLog(
-                        user.user_id,
-                        !statusCheckRenewPrompt
-                          ? "4 weeks prompt"
-                          : "renew prompt",
-                        "level up"
-                      )
+                        this.props.updateProgramPromptLog(
+                          user.user_id,
+                          !statusCheckRenewPrompt
+                            ? "4 weeks prompt"
+                            : "renew prompt",
+                          "level up"
+                        )
                 }
                 style={{
                   width: step4WeeksPrompt < 3 ? 250 : 300,
@@ -2000,33 +2000,49 @@ class VideoList extends Component {
   }
 
   renderVideoListLastWeekAll() {
-    const { focusDay, selectedVDO, selectVideoPlayer, lastWeekStart, weekAll, selectExerciseVideoLastWeek, lastWeekVDO_click, lastWeekVDOAll, showBarveAndBurn } = this.state;
+    const {
+      focusDay,
+      selectedVDO,
+      selectVideoPlayer,
+      lastWeekStart,
+      weekAll,
+      selectExerciseVideoLastWeek,
+      lastWeekVDO_click,
+      lastWeekVDOAll,
+      showBarveAndBurn,
+    } = this.state;
     const { exerciseVideoLastWeek, all_exercise_activity } = this.props;
 
-    const videoUrl = (selectedVDO && selectedVDO.url) ? `${selectedVDO.url}` : "";
+    const videoUrl = selectedVDO && selectedVDO.url ? `${selectedVDO.url}` : "";
     const todayExercise = this.selectExerciseDaySelectionLastWeek(focusDay);
-
 
     let allMinute = [];
     let allSecond = [];
 
-
-
     /*  const selectExerciseVideoLastWeek = exerciseVideoLastWeek */
 
     if (selectExerciseVideoLastWeek) {
-      todayExercise.map((item) => (allMinute.push(Number((item.duration.toFixed(2)).split(".")[0]))));
-      todayExercise.map((item) => (allSecond.push(Number((item.duration.toFixed(2)).split(".")[1]))));
+      todayExercise.map((item) =>
+        allMinute.push(Number(item.duration.toFixed(2).split(".")[0]))
+      );
+      todayExercise.map((item) =>
+        allSecond.push(Number(item.duration.toFixed(2).split(".")[1]))
+      );
     }
-    let sumMinute = allMinute.reduce((acc, curr) => acc += curr, 0).toFixed(0);
-    let sumSecond = allSecond.reduce((acc, curr) => acc += curr, 0).toFixed(0);
+    let sumMinute = allMinute
+      .reduce((acc, curr) => (acc += curr), 0)
+      .toFixed(0);
+    let sumSecond = allSecond
+      .reduce((acc, curr) => (acc += curr), 0)
+      .toFixed(0);
     let minute2 = Math.floor(sumSecond / 60);
     let totalMinute = Number(sumMinute) + Number(minute2);
     let totalSecond = sumSecond % 60;
     let timesExercise;
-    if (totalMinute > 100) { // เช็คเพราะมีการปรับ database ให้เก็บVDOเป็นหน่วยวินาที
+    if (totalMinute > 100) {
+      // เช็คเพราะมีการปรับ database ให้เก็บVDOเป็นหน่วยวินาที
       totalMinute = Math.floor(sumMinute / 60);
-      totalSecond = (sumMinute % 60);
+      totalSecond = sumMinute % 60;
     }
     if (totalSecond < 10) {
       timesExercise = `${totalMinute}:0${totalSecond}`;
@@ -2034,239 +2050,351 @@ class VideoList extends Component {
       timesExercise = `${totalMinute}:${totalSecond}`;
     }
 
-
-
-
-
     return (
+      <>
       <div className="card-body d-flex justify-content-center">
         <form>
-          <div className="tab-content mt-3 mb-3" id="myTabContent" style={{ borderBottom: "3px solid #4F4F4F", paddingBottom: "0px" }}>
-            <div className="tab-pane fade show active" id="home" role="tabpanel" aria-labelledby="home-tab">
-              <h4 className="ml-3 mb-3" style={{ color: "#F45197" }}>โปรแกรมสัปดาห์ที่ผ่านมา</h4>
-              <select class="form-control ml-3 mb-3  col-10  col-sm-10 col-md-4" aria-label="Default select example" onChange={(event) => this.setState({ lastWeekStart: event.target.value })}>
-                {
-                  weekAll && weekAll.map((number) => {
-                    return <option value={number}>Week {number}</option>
-                  })
+          <div
+            className="tab-content mt-3 mb-3"
+            id="myTabContent"
+            style={{ borderBottom: "3px solid #4F4F4F", paddingBottom: "0px" }}
+          >
+            <div
+              className="tab-pane fade show active"
+              id="home"
+              role="tabpanel"
+              aria-labelledby="home-tab"
+            >
+              <h4 className="ml-3 mb-3" style={{ color: "#F45197" }}>
+                โปรแกรมสัปดาห์ที่ผ่านมา
+              </h4>
+              <select
+                class="form-control ml-3 mb-3  col-10  col-sm-10 col-md-4"
+                aria-label="Default select example"
+                onChange={(event) =>
+                  this.setState({ lastWeekStart: event.target.value })
                 }
+              >
+                {weekAll &&
+                  weekAll.map((number) => {
+                    return <option value={number}>Week {number}</option>;
+                  })}
               </select>
               <nav className="nav">
-                {(selectExerciseVideoLastWeek && selectExerciseVideoLastWeek.length >= 1) && (
-                  <div>
-                    <a
-                      className="nav-link"
-                      style={{
-                        borderBottom: `${!showBarveAndBurn && focusDay === 0
-                          ? "3px solid #F45197"
-                          : "none"
+                {selectExerciseVideoLastWeek &&
+                  selectExerciseVideoLastWeek.length >= 1 && (
+                    <div>
+                      <a
+                        className="nav-link"
+                        style={{
+                          borderBottom: `${
+                            !showBarveAndBurn && focusDay === 0
+                              ? "3px solid #F45197"
+                              : "none"
                           }`,
-                        color: `${!showBarveAndBurn && focusDay === 0 ? "#000" : "grey"
+                          color: `${
+                            !showBarveAndBurn && focusDay === 0
+                              ? "#000"
+                              : "grey"
                           }`,
-                        cursor: "pointer",
-                        padding: "0",
-                      }}
-                      onClick={() => this.onDayChange(0)}
-                    >
-                      <h5 style={{ padding: "0px 10px" }}>
-                        <b>DAY 1</b>
-                      </h5>
-                    </a>
-                  </div>
-                )}
-                {(selectExerciseVideoLastWeek && selectExerciseVideoLastWeek.length >= 2) && (
-                  <div>
-                    <a
-                      className="nav-link"
-                      style={{
-                        borderBottom: `${!showBarveAndBurn && focusDay === 1
-                          ? "3px solid #F45197"
-                          : "none"
+                          cursor: "pointer",
+                          padding: "0",
+                        }}
+                        onClick={() => this.onDayChange(0)}
+                      >
+                        <h5 style={{ padding: "0px 10px" }}>
+                          <b>DAY 1</b>
+                        </h5>
+                      </a>
+                    </div>
+                  )}
+                {selectExerciseVideoLastWeek &&
+                  selectExerciseVideoLastWeek.length >= 2 && (
+                    <div>
+                      <a
+                        className="nav-link"
+                        style={{
+                          borderBottom: `${
+                            !showBarveAndBurn && focusDay === 1
+                              ? "3px solid #F45197"
+                              : "none"
                           }`,
-                        color: `${!showBarveAndBurn && focusDay === 1 ? "#000" : "grey"
+                          color: `${
+                            !showBarveAndBurn && focusDay === 1
+                              ? "#000"
+                              : "grey"
                           }`,
-                        cursor: "pointer",
-                        padding: "0",
-                      }}
-                      onClick={() => this.onDayChange(1)}
-                    >
-                      <h5 style={{ padding: "0px 10px" }}>
-                        <b>DAY 2</b>
-                      </h5>
-                    </a>
-                  </div>
-                )}
-                {(selectExerciseVideoLastWeek && selectExerciseVideoLastWeek.length >= 3) && (
-                  <div>
-                    <a
-                      className="nav-link"
-                      style={{
-                        borderBottom: `${!showBarveAndBurn && focusDay === 2
-                          ? "3px solid #F45197"
-                          : "none"
+                          cursor: "pointer",
+                          padding: "0",
+                        }}
+                        onClick={() => this.onDayChange(1)}
+                      >
+                        <h5 style={{ padding: "0px 10px" }}>
+                          <b>DAY 2</b>
+                        </h5>
+                      </a>
+                    </div>
+                  )}
+                {selectExerciseVideoLastWeek &&
+                  selectExerciseVideoLastWeek.length >= 3 && (
+                    <div>
+                      <a
+                        className="nav-link"
+                        style={{
+                          borderBottom: `${
+                            !showBarveAndBurn && focusDay === 2
+                              ? "3px solid #F45197"
+                              : "none"
                           }`,
-                        color: `${!showBarveAndBurn && focusDay === 2 ? "black" : "grey"
+                          color: `${
+                            !showBarveAndBurn && focusDay === 2
+                              ? "black"
+                              : "grey"
                           }`,
-                        cursor: "pointer",
-                        padding: "0",
-                      }}
-                      onClick={() => this.onDayChange(2)}
-                    >
-                      <h5 style={{ padding: "0px 10px" }}>
-                        <b>DAY 3</b>
-                      </h5>
-                    </a>
-                  </div>
-                )}
-                {(selectExerciseVideoLastWeek && selectExerciseVideoLastWeek.length >= 4) && (
-                  <div>
-                    <a
-                      className="nav-link"
-                      style={{
-                        borderBottom: `${!showBarveAndBurn && focusDay === 3
-                          ? "3px solid #F45197"
-                          : "none"
+                          cursor: "pointer",
+                          padding: "0",
+                        }}
+                        onClick={() => this.onDayChange(2)}
+                      >
+                        <h5 style={{ padding: "0px 10px" }}>
+                          <b>DAY 3</b>
+                        </h5>
+                      </a>
+                    </div>
+                  )}
+                {selectExerciseVideoLastWeek &&
+                  selectExerciseVideoLastWeek.length >= 4 && (
+                    <div>
+                      <a
+                        className="nav-link"
+                        style={{
+                          borderBottom: `${
+                            !showBarveAndBurn && focusDay === 3
+                              ? "3px solid #F45197"
+                              : "none"
                           }`,
-                        color: `${!showBarveAndBurn && focusDay === 3 ? "black" : "grey"
+                          color: `${
+                            !showBarveAndBurn && focusDay === 3
+                              ? "black"
+                              : "grey"
                           }`,
-                        cursor: "pointer",
-                        padding: "0",
-                      }}
-                      onClick={() => this.onDayChange(3)}
-                    >
-                      <h5 style={{ padding: "0px 10px" }}>
-                        <b>DAY 4</b>
-                      </h5>
-                    </a>
-                  </div>
-                )}
-                {(selectExerciseVideoLastWeek && selectExerciseVideoLastWeek.length >= 5) && (
-                  <div>
-                    <a
-                      className="nav-link"
-                      style={{
-                        borderBottom: `${!showBarveAndBurn && focusDay === 4
-                          ? "3px solid #F45197"
-                          : "none"
+                          cursor: "pointer",
+                          padding: "0",
+                        }}
+                        onClick={() => this.onDayChange(3)}
+                      >
+                        <h5 style={{ padding: "0px 10px" }}>
+                          <b>DAY 4</b>
+                        </h5>
+                      </a>
+                    </div>
+                  )}
+                {selectExerciseVideoLastWeek &&
+                  selectExerciseVideoLastWeek.length >= 5 && (
+                    <div>
+                      <a
+                        className="nav-link"
+                        style={{
+                          borderBottom: `${
+                            !showBarveAndBurn && focusDay === 4
+                              ? "3px solid #F45197"
+                              : "none"
                           }`,
-                        color: `${!showBarveAndBurn && focusDay === 4 ? "black" : "grey"
+                          color: `${
+                            !showBarveAndBurn && focusDay === 4
+                              ? "black"
+                              : "grey"
                           }`,
-                        cursor: "pointer",
-                        padding: "0",
-                      }}
-                      onClick={() => this.onDayChange(4)}
-                    >
-                      <h5 style={{ padding: "0px 10px" }}>
-                        <b>DAY 5</b>
-                      </h5>
-                    </a>
-                  </div>
-                )}
-                {(selectExerciseVideoLastWeek && selectExerciseVideoLastWeek.length >= 6) && (
-                  <div>
-                    <a
-                      className="nav-link"
-                      style={{
-                        borderBottom: `${!showBarveAndBurn && focusDay === 5
-                          ? "3px solid #F45197"
-                          : "none"
+                          cursor: "pointer",
+                          padding: "0",
+                        }}
+                        onClick={() => this.onDayChange(4)}
+                      >
+                        <h5 style={{ padding: "0px 10px" }}>
+                          <b>DAY 5</b>
+                        </h5>
+                      </a>
+                    </div>
+                  )}
+                {selectExerciseVideoLastWeek &&
+                  selectExerciseVideoLastWeek.length >= 6 && (
+                    <div>
+                      <a
+                        className="nav-link"
+                        style={{
+                          borderBottom: `${
+                            !showBarveAndBurn && focusDay === 5
+                              ? "3px solid #F45197"
+                              : "none"
                           }`,
-                        color: `${!showBarveAndBurn && focusDay === 5 ? "black" : "grey"
+                          color: `${
+                            !showBarveAndBurn && focusDay === 5
+                              ? "black"
+                              : "grey"
                           }`,
-                        cursor: "pointer",
-                        padding: "0",
-                      }}
-                      onClick={() => this.onDayChange(5)}
-                    >
-                      <h5 style={{ padding: "0px 10px" }}>
-                        <b>DAY 6</b>
-                      </h5>
-                    </a>
-                  </div>
-                )}
-                {(selectExerciseVideoLastWeek && selectExerciseVideoLastWeek.length >= 7) && (
-                  <div>
-                    <a
-                      className="nav-link"
-                      style={{
-                        borderBottom: `${!showBarveAndBurn && focusDay === 6
-                          ? "3px solid #F45197"
-                          : "none"
+                          cursor: "pointer",
+                          padding: "0",
+                        }}
+                        onClick={() => this.onDayChange(5)}
+                      >
+                        <h5 style={{ padding: "0px 10px" }}>
+                          <b>DAY 6</b>
+                        </h5>
+                      </a>
+                    </div>
+                  )}
+                {selectExerciseVideoLastWeek &&
+                  selectExerciseVideoLastWeek.length >= 7 && (
+                    <div>
+                      <a
+                        className="nav-link"
+                        style={{
+                          borderBottom: `${
+                            !showBarveAndBurn && focusDay === 6
+                              ? "3px solid #F45197"
+                              : "none"
                           }`,
-                        color: `${!showBarveAndBurn && focusDay === 6 ? "black" : "grey"
+                          color: `${
+                            !showBarveAndBurn && focusDay === 6
+                              ? "black"
+                              : "grey"
                           }`,
-                        cursor: "pointer",
-                        padding: "0",
-                      }}
-                      onClick={() => this.onDayChange(6)}
-                    >
-                      <h5 style={{ padding: "0px 10px" }}>
-                        <b>DAY 7</b>
-                      </h5>
-                    </a>
-                  </div>
-                )}
+                          cursor: "pointer",
+                          padding: "0",
+                        }}
+                        onClick={() => this.onDayChange(6)}
+                      >
+                        <h5 style={{ padding: "0px 10px" }}>
+                          <b>DAY 7</b>
+                        </h5>
+                      </a>
+                    </div>
+                  )}
 
                 <a
                   className="nav-link ml-auto"
                   style={{ cursor: "pointer", color: "#F45197" }}
-                  onClick={() => this.setState({ lastWeekVDO_click: "default" })}
+                  onClick={() =>
+                    this.setState({ lastWeekVDO_click: "default" })
+                  }
                 >
                   <u>ดูวีดีโอออกกำลังกายปัจจุบัน</u>
                 </a>
               </nav>
             </div>
-            <div className="tab-pane fade" id="profile" role="tabpanel" aria-labelledby="profile-tab">pppp</div>
-            <div className="tab-pane fade" id="contact" role="tabpanel" aria-labelledby="contact-tab">kkkkk</div>
           </div>
 
           <div className="">
-            {
-              this.state.autoPlayCheck ?
-                <div className="trailer" id={`popupVDOList`}>
-                  <div>
-
-                    {
-                      videoUrl ?
-                        <VideoPlayerListByteArk url={videoUrl} day_number={focusDay} video_number={selectedVDO && selectedVDO.order} selectedVDO={selectedVDO} lastWeekVDO_click={lastWeekVDO_click} lastWeekVDOAll={lastWeekVDOAll} lastWeekStart={lastWeekStart} selectExerciseVideoLastWeek={selectExerciseVideoLastWeek} />
-                        :
-                        <>
-                          <video ref="videoPlayerList" src={videoUrl} id="videoPlayerList" controls controlsList="nodownload" disablePictureInPicture></video>
-                          <img alt="" src="../assets/img/thumb/close.png" className="close" onClick={() => this.closeList()}></img>
-                        </>
-                    }
-                  </div>
+            {this.state.autoPlayCheck ? (
+              <div className="trailer" id={`popupVDOList`}>
+                <div>
+                  {videoUrl ? (
+                    <VideoPlayerListByteArk
+                      url={videoUrl}
+                      day_number={focusDay}
+                      video_number={selectedVDO && selectedVDO.order}
+                      selectedVDO={selectedVDO}
+                      lastWeekVDO_click={lastWeekVDO_click}
+                      lastWeekVDOAll={lastWeekVDOAll}
+                      lastWeekStart={lastWeekStart}
+                      selectExerciseVideoLastWeek={selectExerciseVideoLastWeek}
+                    />
+                  ) : (
+                    <>
+                      <video
+                        ref="videoPlayerList"
+                        src={videoUrl}
+                        id="videoPlayerList"
+                        controls
+                        controlsList="nodownload"
+                        disablePictureInPicture
+                      ></video>
+                      <img
+                        alt=""
+                        src="../assets/img/thumb/close.png"
+                        className="close"
+                        onClick={() => this.closeList()}
+                      ></img>
+                    </>
+                  )}
                 </div>
-                :
-                <div className="trailer" id={`popupVDO`}>
-                  <div>
-                    {
-                      videoUrl ?
-                        <VideoPlayerByteArk url={videoUrl} day_number={focusDay} video_number={selectedVDO && selectedVDO.order} selectedVDO={selectedVDO} lastWeekVDO_click={lastWeekVDO_click} lastWeekVDOAll={lastWeekVDOAll} lastWeekStart={lastWeekStart} selectExerciseVideoLastWeek={selectExerciseVideoLastWeek} />
-                        :
-                        <>
-                          <video ref="videoPlayer" src={videoUrl} id="videoPlayer" controls controlsList="nodownload" disablePictureInPicture></video>
-                          <img alt="" src="../assets/img/thumb/close.png" className="close" onClick={() => this.toggle()}></img>
-                        </>
-                    }
-                  </div>
+              </div>
+            ) : (
+              <div className="trailer" id={`popupVDO`}>
+                <div>
+                  {videoUrl ? (
+                    <VideoPlayerByteArk
+                      url={videoUrl}
+                      day_number={focusDay}
+                      video_number={selectedVDO && selectedVDO.order}
+                      selectedVDO={selectedVDO}
+                      lastWeekVDO_click={lastWeekVDO_click}
+                      lastWeekVDOAll={lastWeekVDOAll}
+                      lastWeekStart={lastWeekStart}
+                      selectExerciseVideoLastWeek={selectExerciseVideoLastWeek}
+                    />
+                  ) : (
+                    <>
+                      <video
+                        ref="videoPlayer"
+                        src={videoUrl}
+                        id="videoPlayer"
+                        controls
+                        controlsList="nodownload"
+                        disablePictureInPicture
+                      ></video>
+                      <img
+                        alt=""
+                        src="../assets/img/thumb/close.png"
+                        className="close"
+                        onClick={() => this.toggle()}
+                      ></img>
+                    </>
+                  )}
                 </div>
-            }
+              </div>
+            )}
             <table className="table table-responsive">
               <div>
                 <div>
                   <div className="row">
                     <div className="col-lg-6">
                       <div className="">
-                        <span className="mr-5 ml-3" style={{ fontSize: "16px", float: "left", color: "grey" }}> รวมเวลาฝึกทั้งหมด {timesExercise} นาที</span>
+                        <span
+                          className="mr-5 ml-3"
+                          style={{
+                            fontSize: "16px",
+                            float: "left",
+                            color: "grey",
+                          }}
+                        >
+                          {" "}
+                          รวมเวลาฝึกทั้งหมด {timesExercise} นาที
+                        </span>
                       </div>
                     </div>
                     <div className="col-lg-6">
                       <div className="col-lg-12 col-md-4 col-12">
-                        <div className="mt-1" style={{ float: "right" }} >
-                          <span className="mr-2" style={{ fontSize: "18px", fontWeight: "bold", color: "grey" }}>เล่นอัตโนมัติ</span>
-                          <label className="switch" onClick={() => this.autoPlayCheck()}>
-                            <input type="checkbox" className="danger" id="autoPlayCheck"></input>
+                        <div className="mt-1" style={{ float: "right" }}>
+                          <span
+                            className="mr-2"
+                            style={{
+                              fontSize: "18px",
+                              fontWeight: "bold",
+                              color: "grey",
+                            }}
+                          >
+                            เล่นอัตโนมัติ
+                          </span>
+                          <label
+                            className="switch"
+                            onClick={() => this.autoPlayCheck()}
+                          >
+                            <input
+                              type="checkbox"
+                              className="danger"
+                              id="autoPlayCheck"
+                            ></input>
                             <span className="slider round"></span>
                           </label>
                         </div>
@@ -2276,54 +2404,99 @@ class VideoList extends Component {
                 </div>
               </div>
               <tbody>
-                {
-                  (selectExerciseVideoLastWeek) &&
-                  (todayExercise.map((item, index) => {
-                    const minuteLabel = (item.duration < 20) ? convertFormatTime(item.duration) : convertSecondsToMinutes(item.duration);
+                {selectExerciseVideoLastWeek &&
+                  todayExercise.map((item, index) => {
+                    const minuteLabel =
+                      item.duration < 20
+                        ? convertFormatTime(item.duration)
+                        : convertSecondsToMinutes(item.duration);
                     return (
                       <div className="row" key={index}>
                         <div className="checkCompleteVideo mt-3 col-lg-2 col-md-1 col-2">
-                          {
-                            (index === 0) && <h6 className="firstVideoStartText">เริ่มกันเลย!</h6>
-                          }
-                          {
-                            (item.play_time && item.duration && item.play_time / item.duration >= completeVideoPlayPercentage) ?
-                              <span className="dot" style={{ backgroundColor: "#F45197" }}>
-                                <h5 style={{ position: "absolute", top: "50%", left: "50%", transform: "translate(-50%,-50%)", color: "white" }}><i className="fa fa-check fa-lg" ></i></h5>
-                              </span>
-                              :
-                              <span className="dot">
-                                <h3 style={{ position: "absolute", top: "50%", left: "50%", transform: "translate(-50%,-50%)" }}>{index + 1}</h3>
-                              </span>
-                          }
-                          {
-                            (index === todayExercise.length - 1) ?
-                              <div className="vl" style={{ height: "0%" }}></div>
-                              :
-                              <div className="vl"></div>
-                          }
-                          {
-                            (index === todayExercise.length - 1) && <h6 className="lastVideoEndText">สำเร็จแล้ว!</h6>
-                          }
+                          {index === 0 && (
+                            <h6 className="firstVideoStartText">
+                              เริ่มกันเลย!
+                            </h6>
+                          )}
+                          {item.play_time &&
+                          item.duration &&
+                          item.play_time / item.duration >=
+                            completeVideoPlayPercentage ? (
+                            <span
+                              className="dot"
+                              style={{ backgroundColor: "#F45197" }}
+                            >
+                              <h5
+                                style={{
+                                  position: "absolute",
+                                  top: "50%",
+                                  left: "50%",
+                                  transform: "translate(-50%,-50%)",
+                                  color: "white",
+                                }}
+                              >
+                                <i className="fa fa-check fa-lg"></i>
+                              </h5>
+                            </span>
+                          ) : (
+                            <span className="dot">
+                              <h3
+                                style={{
+                                  position: "absolute",
+                                  top: "50%",
+                                  left: "50%",
+                                  transform: "translate(-50%,-50%)",
+                                }}
+                              >
+                                {index + 1}
+                              </h3>
+                            </span>
+                          )}
+                          {index === todayExercise.length - 1 ? (
+                            <div className="vl" style={{ height: "0%" }}></div>
+                          ) : (
+                            <div className="vl"></div>
+                          )}
+                          {index === todayExercise.length - 1 && (
+                            <h6 className="lastVideoEndText">สำเร็จแล้ว!</h6>
+                          )}
                         </div>
                         <div className="mt-3 mb-1 col-lg-8 col-md-11 col-10">
                           <div className="videoItem border shadow">
-                            {
-                              (this.state.autoPlayCheck) &&
-                              <img className="play_button" src="../assets/img/thumb/play_button2.png" width="100px" onClick={() => this.toggleListLastWeek(index)}></img>
-                            }
-                            {
-                              (!this.state.autoPlayCheck) &&
-                              <img className="play_button" src="../assets/img/thumb/play_button2.png" width="100px" onClick={() => this.toggle(item)}></img>
-                            }
+                            {this.state.autoPlayCheck && (
+                              <img
+                                className="play_button"
+                                src="../assets/img/thumb/play_button2.png"
+                                width="100px"
+                                onClick={() => this.toggleListLastWeek(index)}
+                              ></img>
+                            )}
+                            {!this.state.autoPlayCheck && (
+                              <img
+                                className="play_button"
+                                src="../assets/img/thumb/play_button2.png"
+                                width="100px"
+                                onClick={() => this.toggle(item)}
+                              ></img>
+                            )}
                             <div className="videoThumb">
                               <div className="containerThumb">
-                                {
-                                  (item.thumbnail) ?
-                                    <img className="img-fluid" src={`${item.thumbnail}`} alt="" />
-                                    :
-                                    <img className="img-fluid" src={`../assets/img/thumb/${item.category.toLowerCase().split(" ").join("")}_g3.jpg`} alt="" />
-                                }
+                                {item.thumbnail ? (
+                                  <img
+                                    className="img-fluid"
+                                    src={`${item.thumbnail}`}
+                                    alt=""
+                                  />
+                                ) : (
+                                  <img
+                                    className="img-fluid"
+                                    src={`../assets/img/thumb/${item.category
+                                      .toLowerCase()
+                                      .split(" ")
+                                      .join("")}_g3.jpg`}
+                                    alt=""
+                                  />
+                                )}
                                 {/* <div className="overlay" onClick={() => this.toggle(item)}>
                                 <i className="fa fa-play fa-4x" aria-hidden="true"></i>
                                 <div className="videoDuration" style={{ position: "absolute", right: "5%", bottom: "0", color: "white" }}>
@@ -2337,66 +2510,134 @@ class VideoList extends Component {
                             <div className="videoDetail">
                               <div className="videoDuration mt-3">
                                 <h6>
-                                  <i className="fa fa-clock-o fa-1x mr-2" aria-hidden="true"></i>
+                                  <i
+                                    className="fa fa-clock-o fa-1x mr-2"
+                                    aria-hidden="true"
+                                  ></i>
                                   {minuteLabel} นาที
                                 </h6>
                               </div>
-                              <hr className="" style={{ width: "100%", marginTop: "40px" }}></hr>
+                              <hr
+                                className=""
+                                style={{ width: "100%", marginTop: "40px" }}
+                              ></hr>
                               <div className="videoName">
-                                <p style={{ color: "grey", marginBottom: "0px", marginTop: "0px" }}> {item.category} </p>
-                                {(item.name.length < 17) ?
-                                  <h4 style={{ color: "#F45197" }}><b>{item.name}</b></h4>
-                                  :
-                                  <h6 style={{ color: "#F45197" }}><b>{item.name}</b></h6>
-                                }
-                                {
-                                  (this.props.member_info && (this.props.member_info.low_impact === "yes") && item.tag && item.tag.includes("low_impact")) &&
-                                  <p style={{ color: "grey", marginBottom: "0px", marginTop: "-10px" }}> {'(Low impact)'} </p>
-                                }
+                                <p
+                                  style={{
+                                    color: "grey",
+                                    marginBottom: "0px",
+                                    marginTop: "0px",
+                                  }}
+                                >
+                                  {" "}
+                                  {item.category}{" "}
+                                </p>
+                                {item.name.length < 17 ? (
+                                  <h4 style={{ color: "#F45197" }}>
+                                    <b>{item.name}</b>
+                                  </h4>
+                                ) : (
+                                  <h6 style={{ color: "#F45197" }}>
+                                    <b>{item.name}</b>
+                                  </h6>
+                                )}
+                                {this.props.member_info &&
+                                  this.props.member_info.low_impact === "yes" &&
+                                  item.tag &&
+                                  item.tag.includes("low_impact") && (
+                                    <p
+                                      style={{
+                                        color: "grey",
+                                        marginBottom: "0px",
+                                        marginTop: "-10px",
+                                      }}
+                                    >
+                                      {" "}
+                                      {"(Low impact)"}{" "}
+                                    </p>
+                                  )}
                               </div>
-                              { //เช็ค ถ้าหากเป็น category ที่มี type ย่อย จะไม่สามารถนำชื่อ category มาตั้งเป็นชื่อรูปได้ ต้องแยกเป็นเคสๆไป
-                                (item.category !== "Main Circuit Combo" && item.category !== "Main Circuit" && item.category !== "Challenge") &&
-                                <img className="body_part" src={`../assets/img/body_part/${item.category.toLowerCase().split(" ").join("")}.png`}></img>
-                              }
                               {
-                                (item.type.toLowerCase().split(" ").join("") === "chestfocus" || item.type.toLowerCase().split(" ").join("") === "chest_back")
-                                && <img className="body_part ml-2" src={`../assets/img/body_part/chest.png`}></img>
+                                //เช็ค ถ้าหากเป็น category ที่มี type ย่อย จะไม่สามารถนำชื่อ category มาตั้งเป็นชื่อรูปได้ ต้องแยกเป็นเคสๆไป
+                                item.category !== "Main Circuit Combo" &&
+                                  item.category !== "Main Circuit" &&
+                                  item.category !== "Challenge" && (
+                                    <img
+                                      className="body_part"
+                                      src={`../assets/img/body_part/${item.category
+                                        .toLowerCase()
+                                        .split(" ")
+                                        .join("")}.png`}
+                                    ></img>
+                                  )
                               }
-                              {
-                                (item.type.toLowerCase().split(" ").join("") === "backfocus" || item.type.toLowerCase().split(" ").join("") === "chest_back")
-                                && <img className="body_part ml-2" src={`../assets/img/body_part/back.png`}></img>
-                              }
-                              {
-                                (item.type.toLowerCase().split(" ").join("") === "backfocus" || item.type.toLowerCase().split(" ").join("") === "chest_back")
-                                && <img className="body_part ml-2" src={`../assets/img/body_part/core.png`}></img>
-                              }
-                              {
-                                (item.type.toLowerCase().split(" ").join("") === "legfocus" || item.type.toLowerCase().split(" ").join("") === "leg_arm")
-                                && <img className="body_part ml-2" src={`../assets/img/body_part/leg.png`}></img>
-                              }
-                              {
-                                (item.type.toLowerCase().split(" ").join("") === "armfocus" || item.type.toLowerCase().split(" ").join("") === "leg_arm")
-                                && <img className="body_part ml-2" src={`../assets/img/body_part/arm.png`}></img>
-                              }
-                              {
-                                (item.type.toLowerCase().split(" ").join("") === "armfocus" || item.type.toLowerCase().split(" ").join("") === "leg_arm")
-                                && <img className="body_part ml-2" src={`../assets/img/body_part/shoulder.png`}></img>
-                              }
+                              {(item.type.toLowerCase().split(" ").join("") ===
+                                "chestfocus" ||
+                                item.type.toLowerCase().split(" ").join("") ===
+                                  "chest_back") && (
+                                <img
+                                  className="body_part ml-2"
+                                  src={`../assets/img/body_part/chest.png`}
+                                ></img>
+                              )}
+                              {(item.type.toLowerCase().split(" ").join("") ===
+                                "backfocus" ||
+                                item.type.toLowerCase().split(" ").join("") ===
+                                  "chest_back") && (
+                                <img
+                                  className="body_part ml-2"
+                                  src={`../assets/img/body_part/back.png`}
+                                ></img>
+                              )}
+                              {(item.type.toLowerCase().split(" ").join("") ===
+                                "backfocus" ||
+                                item.type.toLowerCase().split(" ").join("") ===
+                                  "chest_back") && (
+                                <img
+                                  className="body_part ml-2"
+                                  src={`../assets/img/body_part/core.png`}
+                                ></img>
+                              )}
+                              {(item.type.toLowerCase().split(" ").join("") ===
+                                "legfocus" ||
+                                item.type.toLowerCase().split(" ").join("") ===
+                                  "leg_arm") && (
+                                <img
+                                  className="body_part ml-2"
+                                  src={`../assets/img/body_part/leg.png`}
+                                ></img>
+                              )}
+                              {(item.type.toLowerCase().split(" ").join("") ===
+                                "armfocus" ||
+                                item.type.toLowerCase().split(" ").join("") ===
+                                  "leg_arm") && (
+                                <img
+                                  className="body_part ml-2"
+                                  src={`../assets/img/body_part/arm.png`}
+                                ></img>
+                              )}
+                              {(item.type.toLowerCase().split(" ").join("") ===
+                                "armfocus" ||
+                                item.type.toLowerCase().split(" ").join("") ===
+                                  "leg_arm") && (
+                                <img
+                                  className="body_part ml-2"
+                                  src={`../assets/img/body_part/shoulder.png`}
+                                ></img>
+                              )}
                             </div>
                           </div>
                         </div>
                       </div>
-
-                    )
-                  }))
-                }
+                    );
+                  })}
               </tbody>
             </table>
           </div>
         </form>
-
       </div>
-    )
+      </>
+    );
   }
 
   renderVideoList() {
@@ -2486,12 +2727,14 @@ class VideoList extends Component {
                     <a
                       className="nav-link"
                       style={{
-                        borderBottom: `${!showBarveAndBurn && focusDay === 0
-                          ? "3px solid #F45197"
-                          : "none"
-                          }`,
-                        color: `${!showBarveAndBurn && focusDay === 0 ? "#000" : "grey"
-                          }`,
+                        borderBottom: `${
+                          !showBarveAndBurn && focusDay === 0
+                            ? "3px solid #F45197"
+                            : "none"
+                        }`,
+                        color: `${
+                          !showBarveAndBurn && focusDay === 0 ? "#000" : "grey"
+                        }`,
                         cursor: "pointer",
                         padding: "0",
                       }}
@@ -2508,12 +2751,14 @@ class VideoList extends Component {
                     <a
                       className="nav-link"
                       style={{
-                        borderBottom: `${!showBarveAndBurn && focusDay === 1
-                          ? "3px solid #F45197"
-                          : "none"
-                          }`,
-                        color: `${!showBarveAndBurn && focusDay === 1 ? "#000" : "grey"
-                          }`,
+                        borderBottom: `${
+                          !showBarveAndBurn && focusDay === 1
+                            ? "3px solid #F45197"
+                            : "none"
+                        }`,
+                        color: `${
+                          !showBarveAndBurn && focusDay === 1 ? "#000" : "grey"
+                        }`,
                         cursor: "pointer",
                         padding: "0",
                       }}
@@ -2530,12 +2775,14 @@ class VideoList extends Component {
                     <a
                       className="nav-link"
                       style={{
-                        borderBottom: `${!showBarveAndBurn && focusDay === 2
-                          ? "3px solid #F45197"
-                          : "none"
-                          }`,
-                        color: `${!showBarveAndBurn && focusDay === 2 ? "black" : "grey"
-                          }`,
+                        borderBottom: `${
+                          !showBarveAndBurn && focusDay === 2
+                            ? "3px solid #F45197"
+                            : "none"
+                        }`,
+                        color: `${
+                          !showBarveAndBurn && focusDay === 2 ? "black" : "grey"
+                        }`,
                         cursor: "pointer",
                         padding: "0",
                       }}
@@ -2552,12 +2799,14 @@ class VideoList extends Component {
                     <a
                       className="nav-link"
                       style={{
-                        borderBottom: `${!showBarveAndBurn && focusDay === 3
-                          ? "3px solid #F45197"
-                          : "none"
-                          }`,
-                        color: `${!showBarveAndBurn && focusDay === 3 ? "black" : "grey"
-                          }`,
+                        borderBottom: `${
+                          !showBarveAndBurn && focusDay === 3
+                            ? "3px solid #F45197"
+                            : "none"
+                        }`,
+                        color: `${
+                          !showBarveAndBurn && focusDay === 3 ? "black" : "grey"
+                        }`,
                         cursor: "pointer",
                         padding: "0",
                       }}
@@ -2574,12 +2823,14 @@ class VideoList extends Component {
                     <a
                       className="nav-link"
                       style={{
-                        borderBottom: `${!showBarveAndBurn && focusDay === 4
-                          ? "3px solid #F45197"
-                          : "none"
-                          }`,
-                        color: `${!showBarveAndBurn && focusDay === 4 ? "black" : "grey"
-                          }`,
+                        borderBottom: `${
+                          !showBarveAndBurn && focusDay === 4
+                            ? "3px solid #F45197"
+                            : "none"
+                        }`,
+                        color: `${
+                          !showBarveAndBurn && focusDay === 4 ? "black" : "grey"
+                        }`,
                         cursor: "pointer",
                         padding: "0",
                       }}
@@ -2596,12 +2847,14 @@ class VideoList extends Component {
                     <a
                       className="nav-link"
                       style={{
-                        borderBottom: `${!showBarveAndBurn && focusDay === 5
-                          ? "3px solid #F45197"
-                          : "none"
-                          }`,
-                        color: `${!showBarveAndBurn && focusDay === 5 ? "black" : "grey"
-                          }`,
+                        borderBottom: `${
+                          !showBarveAndBurn && focusDay === 5
+                            ? "3px solid #F45197"
+                            : "none"
+                        }`,
+                        color: `${
+                          !showBarveAndBurn && focusDay === 5 ? "black" : "grey"
+                        }`,
                         cursor: "pointer",
                         padding: "0",
                       }}
@@ -2618,12 +2871,14 @@ class VideoList extends Component {
                     <a
                       className="nav-link"
                       style={{
-                        borderBottom: `${!showBarveAndBurn && focusDay === 6
-                          ? "3px solid #F45197"
-                          : "none"
-                          }`,
-                        color: `${!showBarveAndBurn && focusDay === 6 ? "black" : "grey"
-                          }`,
+                        borderBottom: `${
+                          !showBarveAndBurn && focusDay === 6
+                            ? "3px solid #F45197"
+                            : "none"
+                        }`,
+                        color: `${
+                          !showBarveAndBurn && focusDay === 6 ? "black" : "grey"
+                        }`,
                         cursor: "pointer",
                         padding: "0",
                       }}
@@ -2636,36 +2891,16 @@ class VideoList extends Component {
                   </div>
                 )}
 
-                {
-                  (this.props.week > 1) &&
-                  (
-
-                    <a
-                      className="nav-link ml-auto"
-                      style={{ cursor: "pointer", color: "#F45197" }}
-                      onClick={() => this.videoWeekAll()}//(this.setState({ lastWeekVDO_click: "show" })
-                    >
-                      <u>ดูวีดีโอออกกำลังกายสัปดาห์ที่ผ่านมา</u>
-                    </a>
-                  )
-                }
+                {this.props.week > 1 && (
+                  <a
+                    className="nav-link ml-auto"
+                    style={{ cursor: "pointer", color: "#F45197" }}
+                    onClick={() => this.videoWeekAll()} //(this.setState({ lastWeekVDO_click: "show" })
+                  >
+                    <u>ดูวีดีโอออกกำลังกายสัปดาห์ที่ผ่านมา</u>
+                  </a>
+                )}
               </nav>
-            </div>
-            <div
-              className="tab-pane fade"
-              id="profile"
-              role="tabpanel"
-              aria-labelledby="profile-tab"
-            >
-              pppp
-            </div>
-            <div
-              className="tab-pane fade"
-              id="contact"
-              role="tabpanel"
-              aria-labelledby="contact-tab"
-            >
-              kkkkk
             </div>
           </div>
 
@@ -2742,11 +2977,15 @@ class VideoList extends Component {
 
             {showImage ? (
               <div>
+                <p
+                  style={{ textAlign: "center", fontSize:"32px", color:"red" }}
+                >{`“ติดตามกิจกรรมได้ที่หน้ากลุ่มเฟซบุ๊ก”`}</p>
                 <img
+                  style={{ objectFit: "cover" }}
                   src={`../assets/img/day${numImage + 1}.jpg`}
                   alt=""
-                  width={1295}
-                  height={600}
+                  width={"100%"}
+                  height={"auto"}
                 />
               </div>
             ) : (
@@ -2815,8 +3054,8 @@ class VideoList extends Component {
                               </h6>
                             )}
                             {item.play_time &&
-                              item.duration &&
-                              item.play_time / item.duration >=
+                            item.duration &&
+                            item.play_time / item.duration >=
                               completeVideoPlayPercentage ? (
                               <span
                                 className="dot"
@@ -2862,35 +3101,30 @@ class VideoList extends Component {
                           </div>
                           <div className="mt-3 mb-1 col-lg-8 col-md-11 col-10">
                             <div className="videoItem border shadow">
-                              {
-                                (
-                                  (this.state.dayOfWeek === focusDay) ||
-                                  !((item.play_time && item.duration) &&
-                                    item.play_time / item.duration >= completeVideoPlayPercentage) ||
-                                  (currentDate < userExpireDate)
-                                ) ?
-
-                                  (this.state.autoPlayCheck) ?
-                                    (
-                                      <img
-                                        className="play_button"
-                                        src="../assets/img/thumb/play_button2.png"
-                                        width="100px"
-                                        onClick={() => this.toggleList(index)}
-                                      ></img>
-                                    )
-                                    :
-                                    (
-                                      <img
-                                        className="play_button"
-                                        src="../assets/img/thumb/play_button2.png"
-                                        width="100px"
-                                        onClick={() => this.toggle(item)}
-                                      ></img>
-                                    )
-                                  :
-                                  null
-                              }
+                              {this.state.dayOfWeek === focusDay ||
+                              !(
+                                item.play_time &&
+                                item.duration &&
+                                item.play_time / item.duration >=
+                                  completeVideoPlayPercentage
+                              ) ||
+                              currentDate < userExpireDate ? (
+                                this.state.autoPlayCheck ? (
+                                  <img
+                                    className="play_button"
+                                    src="../assets/img/thumb/play_button2.png"
+                                    width="100px"
+                                    onClick={() => this.toggleList(index)}
+                                  ></img>
+                                ) : (
+                                  <img
+                                    className="play_button"
+                                    src="../assets/img/thumb/play_button2.png"
+                                    width="100px"
+                                    onClick={() => this.toggle(item)}
+                                  ></img>
+                                )
+                              ) : null}
 
                               <div className="videoThumb">
                                 <div className="containerThumb">
@@ -2956,7 +3190,7 @@ class VideoList extends Component {
                                   )}
                                   {this.props.member_info &&
                                     this.props.member_info.low_impact ===
-                                    "yes" &&
+                                      "yes" &&
                                     item.tag &&
                                     item.tag.includes("low_impact") && (
                                       <p
@@ -2974,16 +3208,16 @@ class VideoList extends Component {
                                 {
                                   //เช็ค ถ้าหากเป็น category ที่มี type ย่อย จะไม่สามารถนำชื่อ category มาตั้งเป็นชื่อรูปได้ ต้องแยกเป็นเคสๆไป
                                   item.category !== "Main Circuit Combo" &&
-                                  item.category !== "Main Circuit" &&
-                                  item.category !== "Challenge" && (
-                                    <img
-                                      className="body_part"
-                                      src={`../assets/img/body_part/${item.category
-                                        .toLowerCase()
-                                        .split(" ")
-                                        .join("")}.png`}
-                                    ></img>
-                                  )
+                                    item.category !== "Main Circuit" &&
+                                    item.category !== "Challenge" && (
+                                      <img
+                                        className="body_part"
+                                        src={`../assets/img/body_part/${item.category
+                                          .toLowerCase()
+                                          .split(" ")
+                                          .join("")}.png`}
+                                      ></img>
+                                    )
                                 }
                                 {(item.type
                                   .toLowerCase()
@@ -2993,11 +3227,11 @@ class VideoList extends Component {
                                     .toLowerCase()
                                     .split(" ")
                                     .join("") === "chest_back") && (
-                                    <img
-                                      className="body_part ml-2"
-                                      src={`../assets/img/body_part/chest.png`}
-                                    ></img>
-                                  )}
+                                  <img
+                                    className="body_part ml-2"
+                                    src={`../assets/img/body_part/chest.png`}
+                                  ></img>
+                                )}
                                 {(item.type
                                   .toLowerCase()
                                   .split(" ")
@@ -3006,11 +3240,11 @@ class VideoList extends Component {
                                     .toLowerCase()
                                     .split(" ")
                                     .join("") === "chest_back") && (
-                                    <img
-                                      className="body_part ml-2"
-                                      src={`../assets/img/body_part/back.png`}
-                                    ></img>
-                                  )}
+                                  <img
+                                    className="body_part ml-2"
+                                    src={`../assets/img/body_part/back.png`}
+                                  ></img>
+                                )}
                                 {(item.type
                                   .toLowerCase()
                                   .split(" ")
@@ -3019,11 +3253,11 @@ class VideoList extends Component {
                                     .toLowerCase()
                                     .split(" ")
                                     .join("") === "chest_back") && (
-                                    <img
-                                      className="body_part ml-2"
-                                      src={`../assets/img/body_part/core.png`}
-                                    ></img>
-                                  )}
+                                  <img
+                                    className="body_part ml-2"
+                                    src={`../assets/img/body_part/core.png`}
+                                  ></img>
+                                )}
                                 {(item.type
                                   .toLowerCase()
                                   .split(" ")
@@ -3032,11 +3266,11 @@ class VideoList extends Component {
                                     .toLowerCase()
                                     .split(" ")
                                     .join("") === "leg_arm") && (
-                                    <img
-                                      className="body_part ml-2"
-                                      src={`../assets/img/body_part/leg.png`}
-                                    ></img>
-                                  )}
+                                  <img
+                                    className="body_part ml-2"
+                                    src={`../assets/img/body_part/leg.png`}
+                                  ></img>
+                                )}
                                 {(item.type
                                   .toLowerCase()
                                   .split(" ")
@@ -3045,11 +3279,11 @@ class VideoList extends Component {
                                     .toLowerCase()
                                     .split(" ")
                                     .join("") === "leg_arm") && (
-                                    <img
-                                      className="body_part ml-2"
-                                      src={`../assets/img/body_part/arm.png`}
-                                    ></img>
-                                  )}
+                                  <img
+                                    className="body_part ml-2"
+                                    src={`../assets/img/body_part/arm.png`}
+                                  ></img>
+                                )}
                                 {(item.type
                                   .toLowerCase()
                                   .split(" ")
@@ -3058,11 +3292,11 @@ class VideoList extends Component {
                                     .toLowerCase()
                                     .split(" ")
                                     .join("") === "leg_arm") && (
-                                    <img
-                                      className="body_part ml-2"
-                                      src={`../assets/img/body_part/shoulder.png`}
-                                    ></img>
-                                  )}
+                                  <img
+                                    className="body_part ml-2"
+                                    src={`../assets/img/body_part/shoulder.png`}
+                                  ></img>
+                                )}
                               </div>
                             </div>
                           </div>
@@ -3182,71 +3416,71 @@ class VideoList extends Component {
                             {
                               //เช็ค ถ้าหากเป็น category ที่มี type ย่อย จะไม่สามารถนำชื่อ category มาตั้งเป็นชื่อรูปได้ ต้องแยกเป็นเคสๆไป
                               item.category !== "Main Circuit Combo" &&
-                              item.category !== "Main Circuit" &&
-                              item.category !== "Challenge" && (
-                                <img
-                                  className="body_part"
-                                  src={`../assets/img/body_part/${item.category
-                                    .toLowerCase()
-                                    .split(" ")
-                                    .join("")}.png`}
-                                ></img>
-                              )
+                                item.category !== "Main Circuit" &&
+                                item.category !== "Challenge" && (
+                                  <img
+                                    className="body_part"
+                                    src={`../assets/img/body_part/${item.category
+                                      .toLowerCase()
+                                      .split(" ")
+                                      .join("")}.png`}
+                                  ></img>
+                                )
                             }
                             {(item.type.toLowerCase().split(" ").join("") ===
                               "chestfocus" ||
                               item.type.toLowerCase().split(" ").join("") ===
-                              "chest_back") && (
-                                <img
-                                  className="body_part ml-2"
-                                  src={`../assets/img/body_part/chest.png`}
-                                ></img>
-                              )}
+                                "chest_back") && (
+                              <img
+                                className="body_part ml-2"
+                                src={`../assets/img/body_part/chest.png`}
+                              ></img>
+                            )}
                             {(item.type.toLowerCase().split(" ").join("") ===
                               "backfocus" ||
                               item.type.toLowerCase().split(" ").join("") ===
-                              "chest_back") && (
-                                <img
-                                  className="body_part ml-2"
-                                  src={`../assets/img/body_part/back.png`}
-                                ></img>
-                              )}
+                                "chest_back") && (
+                              <img
+                                className="body_part ml-2"
+                                src={`../assets/img/body_part/back.png`}
+                              ></img>
+                            )}
                             {(item.type.toLowerCase().split(" ").join("") ===
                               "backfocus" ||
                               item.type.toLowerCase().split(" ").join("") ===
-                              "chest_back") && (
-                                <img
-                                  className="body_part ml-2"
-                                  src={`../assets/img/body_part/core.png`}
-                                ></img>
-                              )}
+                                "chest_back") && (
+                              <img
+                                className="body_part ml-2"
+                                src={`../assets/img/body_part/core.png`}
+                              ></img>
+                            )}
                             {(item.type.toLowerCase().split(" ").join("") ===
                               "legfocus" ||
                               item.type.toLowerCase().split(" ").join("") ===
-                              "leg_arm") && (
-                                <img
-                                  className="body_part ml-2"
-                                  src={`../assets/img/body_part/leg.png`}
-                                ></img>
-                              )}
+                                "leg_arm") && (
+                              <img
+                                className="body_part ml-2"
+                                src={`../assets/img/body_part/leg.png`}
+                              ></img>
+                            )}
                             {(item.type.toLowerCase().split(" ").join("") ===
                               "armfocus" ||
                               item.type.toLowerCase().split(" ").join("") ===
-                              "leg_arm") && (
-                                <img
-                                  className="body_part ml-2"
-                                  src={`../assets/img/body_part/arm.png`}
-                                ></img>
-                              )}
+                                "leg_arm") && (
+                              <img
+                                className="body_part ml-2"
+                                src={`../assets/img/body_part/arm.png`}
+                              ></img>
+                            )}
                             {(item.type.toLowerCase().split(" ").join("") ===
                               "armfocus" ||
                               item.type.toLowerCase().split(" ").join("") ===
-                              "leg_arm") && (
-                                <img
-                                  className="body_part ml-2"
-                                  src={`../assets/img/body_part/shoulder.png`}
-                                ></img>
-                              )}
+                                "leg_arm") && (
+                              <img
+                                className="body_part ml-2"
+                                src={`../assets/img/body_part/shoulder.png`}
+                              ></img>
+                            )}
                           </div>
                         </div>
                       </div>
@@ -3414,19 +3648,17 @@ class VideoList extends Component {
           <div className="container">
             <div className="">
               {this.props.user &&
-                this.props.user.other_attributes &&
-                this.props.statusVideoList !== "no_video"
-                ?
-                (lastWeekVDO_click === "show") ?
-                  this.renderVideoListLastWeekAll()
-                  :
-                  this.renderVideoList()
+              this.props.user.other_attributes &&
+              this.props.statusVideoList !== "no_video"
+                ? lastWeekVDO_click === "show"
+                  ? this.renderVideoListLastWeekAll()
+                  : this.renderVideoList()
                 : statusGetCheck4WeeksPrompt !== "loading" &&
-                statusGetCheckRenewPrompt !== "loading" &&
-                ((statusCheck4WeeksPrompt || statusCheckRenewPrompt) &&
+                  statusGetCheckRenewPrompt !== "loading" &&
+                  ((statusCheck4WeeksPrompt || statusCheckRenewPrompt) &&
                   step4WeeksPrompt < 4 //ปัจจุบัน (4weeks, renew) Prompt ใช้ render เดียวกัน
-                  ? this.render4WeeksPrompt()
-                  : this.renderOtherAttribute())}
+                    ? this.render4WeeksPrompt()
+                    : this.renderOtherAttribute())}
             </div>
           </div>
         </div>

@@ -69,7 +69,7 @@ class Login extends Component {
     const { statusLogin } = this.state;
     return (
       <div className="all-row-login">
-        <div className="row container justify-content-center">
+        <div className="container container-login">
           <div
             className="auth-card shadow col-lg-10 offset-lg-1 col-md-8 col-12"
             style={{ borderRadius: "25px" }}
@@ -93,7 +93,7 @@ class Login extends Component {
               </CardTitle>
               <Form>
 
-                <h4>Email</h4>
+                <h4 style={{textAlign:"left"}}>Email</h4>
                 <Input
                   type="email"
                   id="email"
@@ -128,7 +128,7 @@ class Login extends Component {
                   <Button
                     className="btn-link"
                     color="empty"
-                    href="https://content.bebefitroutine.com/onlinecourse/"
+                    href="https://bebefitroutine.com/sevendaywithpilatesring/"
                     target="_blank"
                     block
                   >
