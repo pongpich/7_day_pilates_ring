@@ -30,10 +30,6 @@
   .text-header{
     font-size: 54px;
   }
-  .watch_introduction {
-    margin-top: 40px;
-    margin-left: -70px;
-  }
 }
 
 @media (max-width: 450px) {
@@ -46,7 +42,7 @@
   .watch_introduction {
     position: relative;
     margin-bottom: 20%;
-    left: 30%;
+    left: 5%;
   }
 }
 
