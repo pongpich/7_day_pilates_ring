@@ -112,6 +112,8 @@ class VideoList extends Component {
       numImage: "0",
       showPopupOptionVideo: false,
       dayOfWeek: (new Date().getDay() + 6) % 7,
+      trigerOptionVideo: false,
+      trigerOptionVideoSelected: null
     };
 
     this.prevPlayTime = 0;
@@ -223,6 +225,8 @@ class VideoList extends Component {
       lastWeekStart,
       focusDay,
       selectedVDO,
+      trigerOptionVideo,
+      trigerOptionVideoSelected
     } = this.state;
     const {
       user,
@@ -244,6 +248,10 @@ class VideoList extends Component {
       showPopupOptionVideo,
     } = this.props;
 
+    if (prevState.trigerOptionVideo !== trigerOptionVideo && trigerOptionVideo) {
+      this.toggle(trigerOptionVideoSelected);
+    }
+
     if (
       prevProps.showPopupOptionVideo !== showPopupOptionVideo &&
       showPopupOptionVideo
@@ -262,6 +270,8 @@ class VideoList extends Component {
     if (prevProps.hidePopUpVideoPlayer !== hidePopUpVideoPlayer) {
       if (hidePopUpVideoPlayer) {
         this.toggle();
+
+        this.setState({ trigerOptionVideo: false })
       }
     }
     //เช็คเพื่อซ่อน popup จากไฟล์ component VideoPlayerList
@@ -817,6 +827,15 @@ class VideoList extends Component {
     }
 
     this.props.setHidePopupVideoPlayerList(true);
+  }
+
+  toggleOptionVideo(selectedVDO) {
+
+    this.setState({
+      trigerOptionVideo: true,
+      trigerOptionVideoSelected: selectedVDO,
+      autoPlayCheck: false
+    })
   }
 
   toggle(selectedVDO) {
@@ -3335,7 +3354,7 @@ class VideoList extends Component {
                               className="play_button"
                               src="../assets/img/thumb/play_button2.png"
                               width="100px"
-                              onClick={() => this.toggle(item)}
+                              onClick={() => this.toggleOptionVideo(item)}
                             ></img>
                           )}
                           <div className="videoThumb">
@@ -3589,7 +3608,7 @@ class VideoList extends Component {
 
     this.setState({ showPopupOptionVideo: false })
 
-    this.toggle(todayExerciseOptionIndex0)
+    this.toggleOptionVideo(todayExerciseOptionIndex0)
   }
 
   closePopupDailyWeighChallenge() {
