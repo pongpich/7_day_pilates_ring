@@ -11,8 +11,6 @@ const VideoPlayerListByteArk = ({ url, day_number, video_number, selectedVDO, la
   const exerciseVideo = useSelector(({ exerciseVideos }) => (exerciseVideos ? exerciseVideos.exerciseVideo : ""));
   const all_exercise_activity = useSelector(({ exerciseVideos }) => (exerciseVideos ? exerciseVideos.all_exercise_activity : ""));
   const exerciseVideoLastWeek = useSelector(({ exerciseVideos }) => (exerciseVideos ? exerciseVideos.exerciseVideoLastWeek : ""));
-  const endedVideoPlayerList = useSelector(({ exerciseVideos }) => (exerciseVideos ? exerciseVideos.endedVideoPlayerList : ""));
-  const statusAutoPlayCheck = useSelector(({ exerciseVideos }) => (exerciseVideos ? exerciseVideos.statusAutoPlayCheck : ""));
   const user = useSelector(({ authUser }) => (authUser ? authUser.user : ""));
   const videoRef = useRef(null);
   const [videoEnded, setVideoEnded] = useState(false); // เพิ่ม state สำหรับตรวจสอบว่าวีดีโอถูกดูจบหรือไม่
