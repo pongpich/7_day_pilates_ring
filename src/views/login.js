@@ -76,7 +76,7 @@ class Login extends Component {
           >
             <div className="position-relative image-side-login mt-3 col-lg-6 col-12">
               <div className="description">
-                <p className="text-welcome">ยินต้อนรับเข้าสู่โปรแกรม</p>
+                <p className="text-welcome">ยินดีต้อนรับเข้าสู่โปรแกรม</p>
                 <p className="text-7-day">7 DAY WITH</p>
                 <p className="text-pilates-ring">PILATES RING</p>
               </div>
