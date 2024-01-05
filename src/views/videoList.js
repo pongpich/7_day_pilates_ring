@@ -2918,7 +2918,7 @@ class VideoList extends Component {
               </nav>
             </div>
           </div>
-          {this.props.week > 1 && (
+          {!showImage && this.props.week > 1 && (
             <a
               className="nav-link ml-auto"
               style={{ cursor: "pointer", color: "#F45197", textAlign: "end" }}
@@ -3004,7 +3004,7 @@ class VideoList extends Component {
                   style={{
                     textAlign: "center",
                     fontSize: "32px",
-                    color: "red",
+                    marginTop:"5%"
                   }}
                 >{`“ติดตามกิจกรรมได้ที่หน้ากลุ่มเฟซบุ๊ก”`}</p>
                 <img
