@@ -2580,98 +2580,12 @@ class VideoList extends Component {
                                       </p>
                                     )}
                                 </div>
-                                {
-                                  //เช็ค ถ้าหากเป็น category ที่มี type ย่อย จะไม่สามารถนำชื่อ category มาตั้งเป็นชื่อรูปได้ ต้องแยกเป็นเคสๆไป
-                                  item.category !== "Main Circuit Combo" &&
-                                  item.category !== "Main Circuit" &&
-                                  item.category !== "Challenge" && (
-                                    <img
-                                      className="body_part"
-                                      src={`../assets/img/body_part/${item.category
-                                        .toLowerCase()
-                                        .split(" ")
-                                        .join("")}.png`}
-                                    ></img>
-                                  )
-                                }
-                                {(item.type
-                                  .toLowerCase()
-                                  .split(" ")
-                                  .join("") === "chestfocus" ||
-                                  item.type
-                                    .toLowerCase()
-                                    .split(" ")
-                                    .join("") === "chest_back") && (
-                                    <img
-                                      className="body_part ml-2"
-                                      src={`../assets/img/body_part/chest.png`}
-                                    ></img>
-                                  )}
-                                {(item.type
-                                  .toLowerCase()
-                                  .split(" ")
-                                  .join("") === "backfocus" ||
-                                  item.type
-                                    .toLowerCase()
-                                    .split(" ")
-                                    .join("") === "chest_back") && (
-                                    <img
-                                      className="body_part ml-2"
-                                      src={`../assets/img/body_part/back.png`}
-                                    ></img>
-                                  )}
-                                {(item.type
-                                  .toLowerCase()
-                                  .split(" ")
-                                  .join("") === "backfocus" ||
-                                  item.type
-                                    .toLowerCase()
-                                    .split(" ")
-                                    .join("") === "chest_back") && (
-                                    <img
-                                      className="body_part ml-2"
-                                      src={`../assets/img/body_part/core.png`}
-                                    ></img>
-                                  )}
-                                {(item.type
-                                  .toLowerCase()
-                                  .split(" ")
-                                  .join("") === "legfocus" ||
-                                  item.type
-                                    .toLowerCase()
-                                    .split(" ")
-                                    .join("") === "leg_arm") && (
-                                    <img
-                                      className="body_part ml-2"
-                                      src={`../assets/img/body_part/leg.png`}
-                                    ></img>
-                                  )}
-                                {(item.type
-                                  .toLowerCase()
-                                  .split(" ")
-                                  .join("") === "armfocus" ||
-                                  item.type
-                                    .toLowerCase()
-                                    .split(" ")
-                                    .join("") === "leg_arm") && (
-                                    <img
-                                      className="body_part ml-2"
-                                      src={`../assets/img/body_part/arm.png`}
-                                    ></img>
-                                  )}
-                                {(item.type
-                                  .toLowerCase()
-                                  .split(" ")
-                                  .join("") === "armfocus" ||
-                                  item.type
-                                    .toLowerCase()
-                                    .split(" ")
-                                    .join("") === "leg_arm") && (
-                                    <img
-                                      className="body_part ml-2"
-                                      src={`../assets/img/body_part/shoulder.png`}
-                                    ></img>
-                                  )}
+
+                                <img
+                                  className="body_part mb-3"
+                                  src={`../assets/img/body_part/full_body.png`}
+                                ></img>
+
                               </div>
                             </div>
                           </div>
@@ -3237,99 +3151,11 @@ class VideoList extends Component {
                                         {"(Low impact)"}{" "}
                                       </p>
                                     )}
-                                </div>
-                                {
-                                  //เช็ค ถ้าหากเป็น category ที่มี type ย่อย จะไม่สามารถนำชื่อ category มาตั้งเป็นชื่อรูปได้ ต้องแยกเป็นเคสๆไป
-                                  item.category !== "Main Circuit Combo" &&
-                                  item.category !== "Main Circuit" &&
-                                  item.category !== "Challenge" && (
-                                    <img
-                                      className="body_part"
-                                      src={`../assets/img/body_part/${item.category
-                                        .toLowerCase()
-                                        .split(" ")
-                                        .join("")}.png`}
-                                    ></img>
-                                  )
-                                }
-                                {(item.type
-                                  .toLowerCase()
-                                  .split(" ")
-                                  .join("") === "chestfocus" ||
-                                  item.type
-                                    .toLowerCase()
-                                    .split(" ")
-                                    .join("") === "chest_back") && (
-                                    <img
-                                      className="body_part ml-2"
-                                      src={`../assets/img/body_part/chest.png`}
-                                    ></img>
-                                  )}
-                                {(item.type
-                                  .toLowerCase()
-                                  .split(" ")
-                                  .join("") === "backfocus" ||
-                                  item.type
-                                    .toLowerCase()
-                                    .split(" ")
-                                    .join("") === "chest_back") && (
-                                    <img
-                                      className="body_part ml-2"
-                                      src={`../assets/img/body_part/back.png`}
-                                    ></img>
-                                  )}
-                                {(item.type
-                                  .toLowerCase()
-                                  .split(" ")
-                                  .join("") === "backfocus" ||
-                                  item.type
-                                    .toLowerCase()
-                                    .split(" ")
-                                    .join("") === "chest_back") && (
-                                    <img
-                                      className="body_part ml-2"
-                                      src={`../assets/img/body_part/core.png`}
-                                    ></img>
-                                  )}
-                                {(item.type
-                                  .toLowerCase()
-                                  .split(" ")
-                                  .join("") === "legfocus" ||
-                                  item.type
-                                    .toLowerCase()
-                                    .split(" ")
-                                    .join("") === "leg_arm") && (
-                                    <img
-                                      className="body_part ml-2"
-                                      src={`../assets/img/body_part/leg.png`}
-                                    ></img>
-                                  )}
-                                {(item.type
-                                  .toLowerCase()
-                                  .split(" ")
-                                  .join("") === "armfocus" ||
-                                  item.type
-                                    .toLowerCase()
-                                    .split(" ")
-                                    .join("") === "leg_arm") && (
-                                    <img
-                                      className="body_part ml-2"
-                                      src={`../assets/img/body_part/arm.png`}
-                                    ></img>
-                                  )}
-                                {(item.type
-                                  .toLowerCase()
-                                  .split(" ")
-                                  .join("") === "armfocus" ||
-                                  item.type
-                                    .toLowerCase()
-                                    .split(" ")
-                                    .join("") === "leg_arm") && (
-                                    <img
-                                      className="body_part ml-2"
-                                      src={`../assets/img/body_part/shoulder.png`}
-                                    ></img>
-                                  )}
+                                </div>   
+                                <img
+                                  className="body_part mb-3"
+                                  src={`../assets/img/body_part/full_body.png`}
+                                ></img>
                               </div>
                             </div>
                           </div>
