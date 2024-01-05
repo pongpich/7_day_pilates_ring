@@ -1,3 +1,60 @@
+@font-face {
+  font-family: 'Creato Display';
+  src: url('./fonts/CreatoDisplay-Regular.otf') format('opentype');
+  font-weight: normal;
+}
+
+@font-face {
+  font-family: 'Creato Display';
+  src: url('./fonts/CreatoDisplay-Bold.otf') format('opentype');
+  font-weight: bold;
+}
+
+@font-face {
+  font-family: "Noto Sans Thai";
+  font-style: normal;
+  font-weight: light;
+  src: url(./fonts/fontsPynk/NotoSansThai-Light.ttf);
+}
+
+@font-face {
+  font-family: "Noto Sans Thai";
+  src: url(./fonts/fontsPynk/NotoSansThai-Thin.ttf);
+  font-weight: thin;
+}
+
+@font-face {
+  font-family: "Noto Sans Thai";
+  src: url(./fonts/fontsPynk/NotoSansThai-Regular.ttf);
+  font-weight: normal;
+}
+
+@font-face {
+  font-family: "Noto Sans Thai";
+  src: url(./fonts/fontsPynk/NotoSansThai-Medium.ttf);
+  font-weight: medium;
+}
+
+@font-face {
+  font-family: "Noto Sans Thai";
+  src: url(./fonts/fontsPynk/NotoSansThai-SemiBold.ttf);
+  font-weight: semi-bold;
+}
+
+@font-face {
+  font-family: "Noto Sans Thai";
+  src: url(./fonts/fontsPynk/NotoSansThai-Bold.ttf);
+  font-weight: bold;
+}
+
+body {
+  font-family: 'Noto Sans Thai', 'Creato Display' ,sans-serif;
+  font-weight: normal;
+  margin: 0;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
 .header {
   padding: 7%;
   text-align: center;
@@ -12,6 +69,7 @@
   flex-direction: column;
 }
 .text-header{
+  font-family: 'Creato Display';
   font-size: 82px;
   color: black;
 }
