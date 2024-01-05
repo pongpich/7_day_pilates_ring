@@ -224,13 +224,12 @@ class App extends Component {
           <img alt="" src="./assets/img/thumb/close.png" className="close" onClick={() => this.closeToggle('popupIntroVDO')}></img>
           {
             showPopupIntro &&
-            <iframe src="https://stream-player.byteark.com/players/6540b05c1524da29c9b6843b/videos/U09zpJ9vzD7a" width="560" height="320" frameborder="0" allowfullscreen referrerpolicy="origin"></iframe>
-          }
+            <iframe src="https://stream-player.byteark.com/players/6540b05c1524da29c9b6843b/videos/U0NvHeq9mPUY" width="560" height="320" frameborder="0" allowfullscreen referrerpolicy="origin"></iframe>}
         </div>
 
         <div className="d-inline-block">
           <span className="text-header">7 DAY WITH </span>
-          <span className="text-header" style={{fontWeight:"bold" }}>PILATES RING</span>
+          <span className="text-header" style={{ fontWeight: "bold" }}>PILATES RING</span>
         </div>
 
         <div className="popupQuestionnaire" id={`popupQuestionnaire`}>
