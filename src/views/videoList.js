@@ -2477,22 +2477,30 @@ class VideoList extends Component {
                           </div>
                           <div className="mt-3 mb-1 col-lg-8 col-md-11 col-10">
                             <div className="videoItem border shadow">
-                              {this.state.autoPlayCheck && (
-                                <img
-                                  className="play_button"
-                                  src="../assets/img/thumb/play_button2.png"
-                                  width="100px"
-                                  onClick={() => this.toggleListLastWeek(index)}
-                                ></img>
-                              )}
-                              {!this.state.autoPlayCheck && (
-                                <img
-                                  className="play_button"
-                                  src="../assets/img/thumb/play_button2.png"
-                                  width="100px"
-                                  onClick={() => this.toggle(item)}
-                                ></img>
-                              )}
+
+                              {
+                                !(
+                                  (item.play_time &&
+                                    item.duration &&
+                                    item.play_time / item.duration >=
+                                    completeVideoPlayPercentage)
+                                ) ? (
+                                  this.state.autoPlayCheck ? (
+                                    <img
+                                      className="play_button"
+                                      src="../assets/img/thumb/play_button2.png"
+                                      width="100px"
+                                      onClick={() => this.toggleListLastWeek(index)}
+                                    ></img>
+                                  ) : (
+                                    <img
+                                      className="play_button"
+                                      src="../assets/img/thumb/play_button2.png"
+                                      width="100px"
+                                      onClick={() => this.toggle(item)}
+                                    ></img>
+                                  )
+                                ) : null}
                               <div className="videoThumb">
                                 <div className="containerThumb">
                                   {item.thumbnail ? (
@@ -3362,7 +3370,7 @@ class VideoList extends Component {
                           )}
 
 
-                          
+
                           <div className="videoThumb">
                             <div className="containerThumb">
                               {item.thumbnail ? (
