@@ -3004,7 +3004,7 @@ class VideoList extends Component {
                   style={{
                     textAlign: "center",
                     fontSize: "32px",
-                    marginTop:"5%"
+                    marginTop: "5%"
                   }}
                 >{`“ติดตามกิจกรรมได้ที่หน้ากลุ่มเฟซบุ๊ก”`}</p>
                 <img
@@ -3127,12 +3127,13 @@ class VideoList extends Component {
                             <div className="videoItem border shadow">
                               {this.state.dayOfWeek === focusDay ||
                                 !(
-                                  item.play_time &&
-                                  item.duration &&
-                                  item.play_time / item.duration >=
-                                  completeVideoPlayPercentage
-                                ) ||
-                                currentDate < userExpireDate ? (
+                                  (item.play_time &&
+                                    item.duration &&
+                                    item.play_time / item.duration >=
+                                    completeVideoPlayPercentage)
+                                  &&
+                                  currentDate < userExpireDate
+                                ) ? (
                                 this.state.autoPlayCheck ? (
                                   <img
                                     className="play_button"
@@ -3359,6 +3360,9 @@ class VideoList extends Component {
                               onClick={() => this.toggleOptionVideo(item)}
                             ></img>
                           )}
+
+
+                          
                           <div className="videoThumb">
                             <div className="containerThumb">
                               {item.thumbnail ? (
