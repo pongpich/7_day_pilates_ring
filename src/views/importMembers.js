@@ -695,7 +695,7 @@ class ImportMembers extends Component {
           ยกเลิก
         </button>
         {
-          (member_type2 === 'low_impact') ?
+          (member_type2 === 'ลิตา') ?
             <button
               type="button"
               className="btn btn-success col-lg-1 col-md-6 "
@@ -911,7 +911,7 @@ class ImportMembers extends Component {
           <div className="mr-4 mb-3" style={{ cursor: "pointer" }}>
             <a className="" onClick={() => this.setState({ selectedRenderPage: "renderBodyInfo", email: "" })} style={{}}>BodyInfo</a>
           </div>
-         {/*  <div className="mr-4 mb-3" style={{ cursor: "pointer" }}>
+          {/*  <div className="mr-4 mb-3" style={{ cursor: "pointer" }}>
             <a className="" onClick={() => this.setState({ selectedRenderPage: "renderMemberEventLog", email: "" })} style={{}}>MemberEventLog</a>
           </div> */}
         </div>
