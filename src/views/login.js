@@ -92,8 +92,7 @@ class Login extends Component {
                 {"เข้าสู่ระบบ"}
               </CardTitle>
               <Form>
-
-                <h4 style={{textAlign:"left"}}>Email</h4>
+                <h4 style={{ textAlign: "left" }}>Email</h4>
                 <Input
                   type="email"
                   id="email"
@@ -109,21 +108,28 @@ class Login extends Component {
                     </small>
                   )}
 
-                <div className="d-flex justify-content-between align-items-center mb-3 btn-login">
-                  <Button
-                    style={{
-                      backgroundColor: "#F45197",
-                      borderColor: "#F45197",
-                      borderRadius: "20px",
-                    }}
-                    className="btn-shadow"
-                    size="lg"
-                    onClick={() => this.onUserLogin()}
-                    block
-                  >
-                    <span className="h6 text-one">{"LOGIN"}</span>
-                  </Button>
-                </div>
+                {this.props.status === "loading" ? (
+                  <div className="spinner-box">
+                    <div className="spinner"></div>
+                  </div>
+                ) : (
+                  <div className="d-flex justify-content-between align-items-center mb-3 btn-login">
+                    <Button
+                      style={{
+                        backgroundColor: "#F45197",
+                        borderColor: "#F45197",
+                        borderRadius: "20px",
+                      }}
+                      className="btn-shadow"
+                      size="lg"
+                      onClick={() => this.onUserLogin()}
+                      block
+                    >
+                      <span className="h6 text-one">{"LOGIN"}</span>
+                    </Button>
+                  </div>
+                )}
+
                 <div className="d-flex justify-content-between align-items-center mb-3">
                   <Button
                     className="btn-link"

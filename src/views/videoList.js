@@ -111,7 +111,7 @@ class VideoList extends Component {
       showImage: false,
       numImage: "0",
       showPopupOptionVideo: false,
-      dayOfWeek: (new Date("09-01-2024").getDay() + 6) % 7,
+      dayOfWeek: (new Date().getDay() + 6) % 7,
       trigerOptionVideo: false,
       trigerOptionVideoSelected: null,
     };

@@ -33,106 +33,94 @@ export const types = {
   CHANGE_EMAIL: "CHANGE_EMAIL",
   CHANGE_EMAIL_SUCCESS: "CHANGE_EMAIL_SUCCESS",
   CHECK_UPDATE_MAX_FRIENDS: "CHECK_UPDATE_MAX_FRIENDS",
-}
+};
 
 export const checkUpdateMaxFriends = (user_id) => ({
   type: types.CHECK_UPDATE_MAX_FRIENDS,
   payload: {
-    user_id
-  }
-})
+    user_id,
+  },
+});
 
-export const changeEmail = (
-  email,
-  new_email
-) => ({
+export const changeEmail = (email, new_email) => ({
   type: types.CHANGE_EMAIL,
   payload: {
     email,
-    new_email
-  }
-})
+    new_email,
+  },
+});
 
-export const getGroupID = (
-  user_id
-) => ({
+export const getGroupID = (user_id) => ({
   type: types.GET_GROUP_ID,
   payload: {
-    user_id
-  }
-})
+    user_id,
+  },
+});
 
-export const resetPassword = (
-  email,
-  user_id,
-  expire_time
-) => ({
+export const resetPassword = (email, user_id, expire_time) => ({
   type: types.RESET_PASSWORD,
   payload: {
     email,
     user_id,
-    expire_time
-  }
-})
+    expire_time,
+  },
+});
 
 export const forgotPassword = (email) => ({
   type: types.FORGOT_PASSWORD,
-  payload: { email }
+  payload: { email },
 });
 
 export const getExpireDate = (email) => ({
   type: types.GET_EXPIRE_DATE,
   payload: {
-    email
-  }
-})
+    email,
+  },
+});
 
 export const trialPackage = (email, expire_date) => ({
   type: types.TRIAL_PACKAGE,
   payload: {
     email,
-    expire_date
-  }
-})
+    expire_date,
+  },
+});
 
 export const setPassword = (email, password) => ({
   type: types.SET_PASSWORD,
   payload: {
     email,
-    password
-  }
-})
+    password,
+  },
+});
 
 export const logoutUser = () => ({
-  type: types.LOGOUT_USER
+  type: types.LOGOUT_USER,
 });
 
 export const checkUser = (email) => ({
   type: types.CHECK_USER,
   payload: {
-    email
-  }
+    email,
+  },
 });
 
 export const loginUser = (email, password) => ({
   type: types.LOGIN_USER,
   payload: {
     email,
-    password
-  }
+    password,
+  },
 });
 
-export const updateProfile = (
-  email,
-  other_attributes,
-  displayName) => ({
-    type: types.UPDATE_PROFILE,
-    payload: {
-      email,
-      other_attributes,
-      displayName
-    }
-  });
+export const updateProfile = (email, other_attributes, displayName) => ({
+  type: types.UPDATE_PROFILE,
+  payload: {
+    email,
+    other_attributes,
+    displayName,
+  },
+});
 
 export const importMembers = (members, start_date, expire_date, kol) => ({
   type: types.IMPORT_MEMBERS,
@@ -140,10 +128,9 @@ export const importMembers = (members, start_date, expire_date, kol) => ({
     members,
     start_date,
     expire_date,
-    kol
-  }
-})
-
+    kol,
+  },
+});
 
 export const register = (email, password, firstname, lastname, phone) => ({
   type: types.REGISTER,
@@ -152,8 +139,8 @@ export const register = (email, password, firstname, lastname, phone) => ({
     password,
     firstname,
     lastname,
-    phone
-  }
+    phone,
+  },
 });
 
 export const signupUser = (email, password, firstname, lastname, phone) => ({
@@ -163,55 +150,20 @@ export const signupUser = (email, password, firstname, lastname, phone) => ({
     password,
     firstname,
     lastname,
-    phone
-  }
+    phone,
+  },
 });
 
 /* END OF ACTION Section */
 
 /* SAGA Section */
 
-const checkUpdateMaxFriendsSagaAsync = async (
-  user_id
-) => {
+const checkUpdateMaxFriendsSagaAsync = async (user_id) => {
   try {
     const apiResult = await API.put("bebe", "/checkUpdateMaxFriends", {
       body: {
-        user_id
-      }
-    });
-    return apiResult
-  } catch (error) {
-    return { error, messsage: error.message };
-  }
-}
-
-const checkUserSagaAsync = async (
-  email
-) => {
-  try {
-    const apiResult = await API.get("bebe", "/check_user", {
-      queryStringParameters: {
-        email: email
-      }
-    });
-    return apiResult
-  } catch (error) {
-    console.log("error :", error);
-    return { error, messsage: error.message }
-  }
-}
-
-const setPasswordSagaAsync = async (
-  email,
-  password
-) => {
-  try {
-    const apiResult = await API.put("bebe", "/setPassword", {
-      body: {
-        email: email,
-        password: password,
-      }
+        user_id,
+      },
     });
     return apiResult;
   } catch (error) {
@@ -219,20 +171,46 @@ const setPasswordSagaAsync = async (
   }
 };
 
-const trialPackageSagaAsync = async (
-  email
-) => {
+const checkUserSagaAsync = async (email) => {
   try {
-    const apiResult = await API.put("bebe", "/trialPackage", {
+    const apiResult = await API.get("bebe", "/check_user", {
+      queryStringParameters: {
+        email: email,
+      },
+    });
+    return apiResult;
+  } catch (error) {
+    console.log("error :", error);
+    return { error, messsage: error.message };
+  }
+};
+
+const setPasswordSagaAsync = async (email, password) => {
+  try {
+    const apiResult = await API.put("bebe", "/setPassword", {
       body: {
         email: email,
-      }
+        password: password,
+      },
     });
     return apiResult;
   } catch (error) {
     return { error, messsage: error.message };
   }
-}
+};
+
+const trialPackageSagaAsync = async (email) => {
+  try {
+    const apiResult = await API.put("bebe", "/trialPackage", {
+      body: {
+        email: email,
+      },
+    });
+    return apiResult;
+  } catch (error) {
+    return { error, messsage: error.message };
+  }
+};
 
 const importMembersSagaAsync = async (
   members,
@@ -246,14 +224,14 @@ const importMembersSagaAsync = async (
         members,
         start_date,
         expire_date,
-        kol
-      }
+        kol,
+      },
     });
     return apiResult;
   } catch (error) {
     return { error, messsage: error.message };
   }
-}
+};
 
 const registerSagaAsync = async (
   email,
@@ -269,8 +247,8 @@ const registerSagaAsync = async (
         password: password,
         first_name: firstname,
         last_name: lastname,
-        phone: phone
-      }
+        phone: phone,
+      },
     });
     return apiResult;
   } catch (error) {
@@ -278,24 +256,20 @@ const registerSagaAsync = async (
   }
 };
 
-const updateProfileSagaAsync = async (
-  email,
-  other_attributes,
-  displayName
-) => {
+const updateProfileSagaAsync = async (email, other_attributes, displayName) => {
   try {
     const apiResult = await API.post("bebe", "/updateProfile", {
       body: {
         email: email,
         other_attributes,
-        displayName
-      }
+        displayName,
+      },
     });
     return apiResult;
   } catch (error) {
     return { error, messsage: error.message };
   }
-}
+};
 
 const signupUserSagaAsync = async (
   email,
@@ -311,8 +285,8 @@ const signupUserSagaAsync = async (
         password: password,
         first_name: firstname,
         last_name: lastname,
-        phone: phone
-      }
+        phone: phone,
+      },
     });
     return apiResult;
   } catch (error) {
@@ -320,169 +294,128 @@ const signupUserSagaAsync = async (
   }
 };
 
-const getExpireDateSagaAsync = async (
-  email
-) => {
+const getExpireDateSagaAsync = async (email) => {
   try {
     const apiResult = await API.get("bebe", "/getExpireDate", {
       queryStringParameters: {
-        email
-      }
-    });
-    return apiResult
-  } catch (error) {
-    return { error, messsage: error.message };
-  }
-}
-
-const changeEmailSagaAsync = async (
-  email,
-  new_email
-) => {
-  try {
-    const apiResult = await API.put("bebe", "/changeEmail", {
-      body: {
         email,
-        new_email
-      }
-    });
-    return apiResult
-  } catch (error) {
-    return { error, messsage: error.message };
-  }
-}
-
-const getGroupIDSagaAsync = async (
-  user_id
-) => {
-  try {
-    const apiResult = await API.get("bebe", "/getGroupID", {
-      queryStringParameters: {
-        user_id
-      }
-    });
-    return apiResult
-  } catch (error) {
-    return { error, messsage: error.message };
-  }
-}
-
-const resetPasswordSagaAsync = async (
-  email,
-  user_id,
-  expire_time
-) => {
-  try {
-    const apiResult = await API.put("bebe", "/resetPassword", {
-      body: {
-        email,
-        user_id,
-        expire_time
-      }
+      },
     });
     return apiResult;
   } catch (error) {
     return { error, messsage: error.message };
   }
-}
+};
 
-const forgotPasswordSagaAsync = async (
-  email
-) => {
+const changeEmailSagaAsync = async (email, new_email) => {
   try {
-    const apiResult = await API.get("bebe", "/forgotPassword", {
-      queryStringParameters: {
-        email
-      }
+    const apiResult = await API.put("bebe", "/changeEmail", {
+      body: {
+        email,
+        new_email,
+      },
     });
-    return apiResult
+    return apiResult;
   } catch (error) {
     return { error, messsage: error.message };
   }
-}
+};
 
-const loginUserSagaAsync = async (
-  email,
-  password
-) => {
+const getGroupIDSagaAsync = async (user_id) => {
+  try {
+    const apiResult = await API.get("bebe", "/getGroupID", {
+      queryStringParameters: {
+        user_id,
+      },
+    });
+    return apiResult;
+  } catch (error) {
+    return { error, messsage: error.message };
+  }
+};
+
+const resetPasswordSagaAsync = async (email, user_id, expire_time) => {
+  try {
+    const apiResult = await API.put("bebe", "/resetPassword", {
+      body: {
+        email,
+        user_id,
+        expire_time,
+      },
+    });
+    return apiResult;
+  } catch (error) {
+    return { error, messsage: error.message };
+  }
+};
+
+const forgotPasswordSagaAsync = async (email) => {
+  try {
+    const apiResult = await API.get("bebe", "/forgotPassword", {
+      queryStringParameters: {
+        email,
+      },
+    });
+    return apiResult;
+  } catch (error) {
+    return { error, messsage: error.message };
+  }
+};
+
+const loginUserSagaAsync = async (email, password) => {
   try {
     const apiResult = await API.get("bebe", "/login", {
       queryStringParameters: {
         email: email,
-        password: password
-      }
+        password: password,
+      },
     });
-    return apiResult
+    return apiResult;
   } catch (error) {
     return { error, messsage: error.message };
   }
 };
 
 function* checkUserSaga({ payload }) {
-  const {
-    email
-  } = payload
+  const { email } = payload;
 
   try {
-    const apiResult = yield call(
-      checkUserSagaAsync,
-      email
-    );
+    const apiResult = yield call(checkUserSagaAsync, email);
     yield put({
       type: types.CHECK_USER_SUCCESS,
-      payload: apiResult.results.message
-    })
+      payload: apiResult.results.message,
+    });
   } catch (error) {
     console.log("error from checkUserSaga :", error);
   }
 }
 
 function* checkUpdateMaxFriendsSaga({ payload }) {
-  const {
-    user_id
-  } = payload
+  const { user_id } = payload;
 
   try {
-    const apiResult = yield call(
-      checkUpdateMaxFriendsSagaAsync,
-      user_id
-    );
+    const apiResult = yield call(checkUpdateMaxFriendsSagaAsync, user_id);
   } catch (error) {
     console.log("error from checkUpdateMaxFriendsSaga :", error);
   }
 }
 
 function* updateProfileSaga({ payload }) {
-  const {
-    email,
-    other_attributes,
-    displayName
-  } = payload
+  const { email, other_attributes, displayName } = payload;
 
   try {
-    yield call(
-      updateProfileSagaAsync,
-      email,
-      other_attributes,
-      displayName
-    );
+    yield call(updateProfileSagaAsync, email, other_attributes, displayName);
     yield put({
       type: types.UPDATE_PROFILE_SUCCESS,
-      payload: other_attributes
-    })
+      payload: other_attributes,
+    });
   } catch (error) {
     console.log("error from updateProfile :", error);
   }
 }
 
 function* signupUserSaga({ payload }) {
-  const {
-    email,
-    password,
-    firstname,
-    lastname,
-    phone
-  } = payload
+  const { email, password, firstname, lastname, phone } = payload;
 
   try {
     const apiResult = yield call(
@@ -500,52 +433,34 @@ function* signupUserSaga({ payload }) {
 }
 
 function* setPasswordSaga({ payload }) {
-  const {
-    email,
-    password
-  } = payload
+  const { email, password } = payload;
 
   try {
-    yield call(
-      setPasswordSagaAsync,
-      email,
-      password
-    );
+    yield call(setPasswordSagaAsync, email, password);
     yield put({
-      type: types.SET_PASSWORD_SUCCESS
-    })
+      type: types.SET_PASSWORD_SUCCESS,
+    });
   } catch (error) {
     console.log("error from setPasswordSaga :", error);
   }
 }
 
 function* trialPackageSaga({ payload }) {
-  const {
-    email,
-    expire_date
-  } = payload
+  const { email, expire_date } = payload;
 
   try {
-    yield call(
-      trialPackageSagaAsync,
-      email
-    );
+    yield call(trialPackageSagaAsync, email);
     yield put({
       type: types.TRIAL_PACKAGE_SUCCESS,
-      payload: expire_date
-    })
+      payload: expire_date,
+    });
   } catch (error) {
     console.log("error from trialPackageSaga :", error);
   }
 }
 
 function* importMembersSaga({ payload }) {
-  const {
-    members,
-    start_date,
-    expire_date,
-    kol
-  } = payload
+  const { members, start_date, expire_date, kol } = payload;
   try {
     const apiResult = yield call(
       importMembersSagaAsync,
@@ -553,136 +468,105 @@ function* importMembersSaga({ payload }) {
       start_date,
       expire_date,
       kol
-    )
+    );
     console.log("apiResult :", apiResult);
     if (apiResult && apiResult.results.message === "success") {
       yield put({
-        type: types.IMPORT_MEMBERS_SUCCESS
-      })
+        type: types.IMPORT_MEMBERS_SUCCESS,
+      });
     } else {
       yield put({
-        type: types.IMPORT_MEMBERS_FAIL
-      })
+        type: types.IMPORT_MEMBERS_FAIL,
+      });
     }
   } catch (error) {
     yield put({
-      type: types.IMPORT_MEMBERS_FAIL
-    })
+      type: types.IMPORT_MEMBERS_FAIL,
+    });
     console.log("error from importMembersSaga :", error);
   }
 }
 
 function* registerSaga({ payload }) {
-  const {
-    email,
-    password,
-    firstname,
-    lastname,
-    phone
-  } = payload
+  const { email, password, firstname, lastname, phone } = payload;
 
   try {
-    yield call(
-      registerSagaAsync,
-      email,
-      password,
-      firstname,
-      lastname,
-      phone
-    );
+    yield call(registerSagaAsync, email, password, firstname, lastname, phone);
     yield put({
-      type: types.REGISTER_SUCCESS
-    })
+      type: types.REGISTER_SUCCESS,
+    });
   } catch (error) {
     console.log("error from register :", error);
   }
 }
 
 function* getExpireDateSaga({ payload }) {
-  const {
-    email
-  } = payload
+  const { email } = payload;
 
   try {
-    const apiResult = yield call(
-      getExpireDateSagaAsync,
-      email
-    );
+    const apiResult = yield call(getExpireDateSagaAsync, email);
     yield put({
       type: types.GET_EXPIRE_DATE_SUCCESS,
-      payload: apiResult.results.expire_date
-    })
+      payload: apiResult.results.expire_date,
+    });
   } catch (error) {
     console.log("error from getExpireDateSaga :", error);
   }
 }
 
 function* getGroupIDSaga({ payload }) {
-  const {
-    user_id
-  } = payload
+  const { user_id } = payload;
 
   try {
-    const apiResult = yield call(
-      getGroupIDSagaAsync,
-      user_id
-    );
+    const apiResult = yield call(getGroupIDSagaAsync, user_id);
     yield put({
       type: types.GET_GROUP_ID_SUCCESS,
-      payload: apiResult.results.group_id
-    })
+      payload: apiResult.results.group_id,
+    });
   } catch (error) {
     console.log("error from getGroupIDSaga :", error);
   }
 }
 
 function* changeEmailSaga({ payload }) {
-  const {
-    email,
-    new_email
-  } = payload
+  const { email, new_email } = payload;
 
   try {
-    const apiResult = yield call(
-      changeEmailSagaAsync,
-      email,
-      new_email
-    );
+    const apiResult = yield call(changeEmailSagaAsync, email, new_email);
     yield put({
       type: types.CHANGE_EMAIL_SUCCESS,
-      payload: apiResult.results.message
-    })
+      payload: apiResult.results.message,
+    });
     yield put({
       type: types.CHANGE_EMAIL_FAIL,
-      payload: apiResult.results.message
-    })
+      payload: apiResult.results.message,
+    });
   } catch (error) {
     console.log("error from changeEmailSaga :", error);
   }
 }
 
 function* resetPasswordSaga({ payload }) {
-  const {
-    email,
-    user_id,
-    expire_time
-  } = payload;
+  const { email, user_id, expire_time } = payload;
   try {
     const apiResult = yield call(
       resetPasswordSagaAsync,
       email,
       user_id,
       expire_time
-    )
+    );
     if (apiResult.results.message === "success") {
       yield put({
         type: types.RESET_PASSWORD_SUCCESS,
-        payload: apiResult.results.user
-      })
-    } else if (apiResult.results.message === "fail" || apiResult.results.message === "no_user") {
+        payload: apiResult.results.user,
+      });
+    } else if (
+      apiResult.results.message === "fail" ||
+      apiResult.results.message === "no_user"
+    ) {
       yield put({
-        type: types.RESET_PASSWORD_FAIL
-      })
+        type: types.RESET_PASSWORD_FAIL,
+      });
     }
   } catch (error) {
     console.log("error from resetPasswordSaga :", error);
@@ -692,40 +576,33 @@ function* resetPasswordSaga({ payload }) {
 function* forgotPasswordSaga({ payload }) {
   const { email } = payload;
   try {
-    yield call(
-      forgotPasswordSagaAsync,
-      email
-    );
+    yield call(forgotPasswordSagaAsync, email);
   } catch (error) {
     console.log("error from forgotPasswordSaga :", error);
   }
 }
 
 function* loginUserSaga({ payload }) {
-  const {
-    email,
-    password
-  } = payload
+  const { email, password } = payload;
 
   try {
     console.log("hhhhh");
-    const loginResult = yield call(
-      loginUserSagaAsync,
-      email,
-      password
-    );
+    const loginResult = yield call(loginUserSagaAsync, email, password);
     console.log(loginResult);
     if (loginResult.results.message === "success") {
       console.log("user :", loginResult.results.user);
       yield put({
         type: types.LOGIN_USER_SUCCESS,
-        payload: loginResult.results.user
-      })
-    } else if (loginResult.results.message === "fail" || loginResult.results.message === "no_user") {
+        payload: loginResult.results.user,
+      });
+    } else if (
+      loginResult.results.message === "fail" ||
+      loginResult.results.message === "no_user"
+    ) {
       console.log("user :", loginResult.results.user);
       yield put({
-        type: types.LOGIN_USER_FAIL
-      })
+        type: types.LOGIN_USER_FAIL,
+      });
     }
   } catch (error) {
     console.log("error form login", error);
@@ -733,11 +610,11 @@ function* loginUserSaga({ payload }) {
 }
 
 export function* watchCheckUser() {
-  yield takeEvery(types.CHECK_USER, checkUserSaga)
+  yield takeEvery(types.CHECK_USER, checkUserSaga);
 }
 
 export function* watchLoginUser() {
-  yield takeEvery(types.LOGIN_USER, loginUserSaga)
+  yield takeEvery(types.LOGIN_USER, loginUserSaga);
 }
 
 export function* watchSignupUser() {
@@ -745,23 +622,23 @@ export function* watchSignupUser() {
 }
 
 export function* watchRegister() {
-  yield takeEvery(types.REGISTER, registerSaga)
+  yield takeEvery(types.REGISTER, registerSaga);
 }
 
 export function* watchUpdateProfile() {
-  yield takeEvery(types.UPDATE_PROFILE, updateProfileSaga)
+  yield takeEvery(types.UPDATE_PROFILE, updateProfileSaga);
 }
 
 export function* watchSetPassword() {
-  yield takeEvery(types.SET_PASSWORD, setPasswordSaga)
+  yield takeEvery(types.SET_PASSWORD, setPasswordSaga);
 }
 
 export function* watchTrialPackage() {
-  yield takeEvery(types.TRIAL_PACKAGE, trialPackageSaga)
+  yield takeEvery(types.TRIAL_PACKAGE, trialPackageSaga);
 }
 
 export function* watchGetExpireDate() {
-  yield takeEvery(types.GET_EXPIRE_DATE, getExpireDateSaga)
+  yield takeEvery(types.GET_EXPIRE_DATE, getExpireDateSaga);
 }
 
 export function* watchForgotPassword() {
@@ -769,7 +646,7 @@ export function* watchForgotPassword() {
 }
 
 export function* watchResetPassword() {
-  yield takeEvery(types.RESET_PASSWORD, resetPasswordSaga)
+  yield takeEvery(types.RESET_PASSWORD, resetPasswordSaga);
 }
 
 export function* watchImportMembers() {
@@ -785,7 +662,7 @@ export function* watchChangeEmail() {
 }
 
 export function* watchCheckUpdateMaxFriends() {
-  yield takeEvery(types.CHECK_UPDATE_MAX_FRIENDS, checkUpdateMaxFriendsSaga)
+  yield takeEvery(types.CHECK_UPDATE_MAX_FRIENDS, checkUpdateMaxFriendsSaga);
 }
 
 export function* saga() {
@@ -818,7 +695,7 @@ const INIT_STATE = {
   statusRegister: "default",
   statusResetPassword: "default",
   statusChangeEmail: "default",
-  statusImportMembers: "default"
+  statusImportMembers: "default",
 };
 
 export function reducer(state = INIT_STATE, action) {
@@ -826,90 +703,95 @@ export function reducer(state = INIT_STATE, action) {
     case types.IMPORT_MEMBERS:
       return {
         ...state,
-        statusImportMembers: "loading"
-      }
+        statusImportMembers: "loading",
+      };
     case types.IMPORT_MEMBERS_SUCCESS:
       return {
         ...state,
-        statusImportMembers: "success"
-      }
+        statusImportMembers: "success",
+      };
     case types.IMPORT_MEMBERS_FAIL:
       return {
         ...state,
-        statusImportMembers: "fail"
-      }
+        statusImportMembers: "fail",
+      };
     case types.GET_EXPIRE_DATE_SUCCESS:
       return {
         ...state,
         user: {
           ...state.user,
-          expire_date: action.payload
-        }
-      }
+          expire_date: action.payload,
+        },
+      };
     case types.GET_GROUP_ID_SUCCESS:
       return {
         ...state,
         user: {
           ...state.user,
-          group_id: action.payload
-        }
-      }
+          group_id: action.payload,
+        },
+      };
     case types.CHECK_USER_SUCCESS:
       return {
         ...state,
-        statusRegister: action.payload
-      }
+        statusRegister: action.payload,
+      };
     case types.RESET_PASSWORD_SUCCESS:
       return {
         ...state,
-        statusResetPassword: "success"
+        statusResetPassword: "success",
       };
     case types.SET_PASSWORD_SUCCESS:
       return {
         ...state,
-        statusResetPassword: "default"
-      }
+        statusResetPassword: "default",
+      };
+    case types.LOGIN_USER:
+      return {
+        ...state,
+        status: "loading",
+      };
     case types.LOGIN_USER_SUCCESS:
       return {
         ...state,
         user: action.payload,
         status: "success",
         statusRegister: "default",
-        statusResetPassword: "default"
+        statusResetPassword: "default",
       };
     case types.LOGIN_USER_FAIL:
       return {
         ...state,
         status: "fail",
         statusRegister: "default",
-        statusResetPassword: "default"
+        statusResetPassword: "default",
       };
     case types.REGISTER_SUCCESS:
       return {
         ...state,
-        statusRegister: "success"
-      }
+        statusRegister: "success",
+      };
     case types.UPDATE_PROFILE_SUCCESS:
       return {
         ...state,
         user: {
           ...state.user,
-          other_attributes: action.payload
-        }
-      }
+          other_attributes: action.payload,
+        },
+      };
     case types.TRIAL_PACKAGE_SUCCESS:
       return {
         ...state,
         user: {
           ...state.user,
-          expire_date: action.payload
-        }
+          expire_date: action.payload,
+        },
       };
     case types.CHANGE_EMAIL_SUCCESS:
       return {
         ...state,
-        statusChangeEmail: action.payload
-      }
+        statusChangeEmail: action.payload,
+      };
     case types.LOGOUT_USER:
       return INIT_STATE;
     default:
