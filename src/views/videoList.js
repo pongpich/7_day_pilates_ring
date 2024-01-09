@@ -519,7 +519,6 @@ class VideoList extends Component {
           /*    validation_displayname: false, */
           checkDisplayName: "success",
         });
-        console.log("statusDisplayName", statusDisplayName);
       } else if (statusDisplayName === "fail") {
         if (displayName3 && displayName3 === displayName2) {
           this.setState({
@@ -691,7 +690,6 @@ class VideoList extends Component {
   }
 
   handleChange(event) {
-    /*  console.log("444"); */
     const name = event.target.name;
     const valuName = event.target.value;
 
@@ -796,7 +794,6 @@ class VideoList extends Component {
   }
 
   toggleList(index) {
-    console.log("toggleList");
     const { focusDay } = this.state;
     const todayExercise = this.exerciseDaySelection(focusDay);
     const selectedVDO = todayExercise.find(
@@ -1349,7 +1346,6 @@ class VideoList extends Component {
 
   renderBodyInfo() {
     const { statusOtherAttributes } = this.state;
-    /*  console.log("window.innerWidth :", window.innerWidth); */
     return (
       <div
         className="card shadow"

@@ -426,7 +426,6 @@ function* signupUserSaga({ payload }) {
       lastname,
       phone
     );
-    console.log("signupUser : ", apiResult);
   } catch (error) {
     console.log("error from signupUser :", error);
   }
@@ -469,7 +468,6 @@ function* importMembersSaga({ payload }) {
       expire_date,
       kol
     );
-    console.log("apiResult :", apiResult);
     if (apiResult && apiResult.results.message === "success") {
       yield put({
         type: types.IMPORT_MEMBERS_SUCCESS,
@@ -586,11 +584,8 @@ function* loginUserSaga({ payload }) {
   const { email, password } = payload;
 
   try {
-    console.log("hhhhh");
     const loginResult = yield call(loginUserSagaAsync, email, password);
-    console.log(loginResult);
     if (loginResult.results.message === "success") {
-      console.log("user :", loginResult.results.user);
       yield put({
         type: types.LOGIN_USER_SUCCESS,
         payload: loginResult.results.user,
@@ -599,7 +594,6 @@ function* loginUserSaga({ payload }) {
       loginResult.results.message === "fail" ||
       loginResult.results.message === "no_user"
     ) {
-      console.log("user :", loginResult.results.user);
       yield put({
         type: types.LOGIN_USER_FAIL,
       });
