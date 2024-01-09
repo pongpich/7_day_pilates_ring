@@ -756,15 +756,11 @@ export function reducer(state = INIT_STATE, action) {
         ...state,
         user: action.payload,
         status: "success",
-        statusRegister: "default",
-        statusResetPassword: "default",
       };
     case types.LOGIN_USER_FAIL:
       return {
         ...state,
         status: "fail",
-        statusRegister: "default",
-        statusResetPassword: "default",
       };
     case types.REGISTER_SUCCESS:
       return {

@@ -15,10 +15,15 @@ class Login extends Component {
   }
 
   componentDidMount() {
+    document.addEventListener('keydown', this.handleKeyPress);
     const { user } = this.props;
     if (user !== null) {
       this.props.history.push("/videolist");
     }
+  }
+
+  componentWillUnmount() {
+    document.removeEventListener('keydown', this.handleKeyPress);
   }
 
   componentDidUpdate(prevProps) {
@@ -42,7 +47,7 @@ class Login extends Component {
     }
   }
 
-  onUserLogin() {
+  onUserLogin = () => {
     if (this.state.email !== "") {
       this.props.loginUser(this.state.email, this.state.password);
       if (
@@ -52,6 +57,7 @@ class Login extends Component {
           statusLogin: "fail",
         });
       }
+      
     } else if (this.state.email === "") {
       this.setState({
         statusLogin: "fail",
@@ -64,6 +70,13 @@ class Login extends Component {
       [event.target.id]: event.target.value,
     });
   }
+
+  handleKeyPress = (event) => {
+    if (event.key === 'Enter') {
+      event.preventDefault();
+      this.onUserLogin();
+    }
+  };
 
   render() {
     const { statusLogin } = this.state;
@@ -122,7 +135,7 @@ class Login extends Component {
                       }}
                       className="btn-shadow"
                       size="lg"
-                      onClick={() => this.onUserLogin()}
+                      onClick={this.onUserLogin}
                       block
                     >
                       <span className="h6 text-one">{"LOGIN"}</span>
