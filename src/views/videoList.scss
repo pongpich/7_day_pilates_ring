@@ -84,6 +84,12 @@
 .day a {
   width: 80px !important;
 }
+
+.text-day2 {
+  text-align: center;
+  font-size: 32px;
+  margin-top: 5%;
+}
 @media (max-width: 590px) {
   .day-all {
     padding-top: 20px;
@@ -97,11 +103,9 @@
     white-space: nowrap; /* ป้องกันข้อความขึ้นบรรทัดใหม่ */
     justify-content: unset;
   }
-}
-.text-day2{
-    text-align: center;
+  .text-day2 {
     font-size: 18px;
-    margin-top: 5%;
+  }
 }
 
 .page-header {
