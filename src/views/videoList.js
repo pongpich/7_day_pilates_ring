@@ -2926,12 +2926,7 @@ class VideoList extends Component {
 
             {showImage ? (
               <div>
-                <p
-                  style={{
-                    textAlign: "center",
-                    fontSize: "32px",
-                    marginTop: "5%",
-                  }}
+                <p className="text-day2"
                 >{`“ติดตามกิจกรรมได้ที่หน้ากลุ่มเฟซบุ๊ก”`}</p>
                 <img
                   style={{ objectFit: "cover" }}
