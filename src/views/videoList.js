@@ -2668,30 +2668,18 @@ class VideoList extends Component {
           <div
             className="tab-content"
             id="myTabContent"
-            style={{
-              paddingBottom: "0px",
-              backgroundColor: "#FFF8FB",
-              height: "100px",
-              marginTop: "-6%",
-            }}
           >
             <div
               className="tab-pane fade show active d-flex justify-content-around"
               id="home"
               role="tabpanel"
               aria-labelledby="home-tab"
-              style={{ height: "100%" }}
             >
               <nav
-                className="nav"
-                style={{
-                  alignItems: "center",
-                  width: "70%",
-                  justifyContent: "space-around",
-                }}
+                className="day-all"
               >
                 {numbDayExercise >= 1 && (
-                  <div>
+                  <div className="day">
                     <a
                       className="nav-link"
                       style={{
@@ -2715,7 +2703,7 @@ class VideoList extends Component {
                   </div>
                 )}
                 {numbDayExercise >= 2 && (
-                  <div>
+                  <div className="day">
                     <a
                       className="nav-link"
                       style={{
@@ -2739,7 +2727,7 @@ class VideoList extends Component {
                   </div>
                 )}
                 {numbDayExercise >= 3 && (
-                  <div>
+                  <div className="day">
                     <a
                       className="nav-link"
                       style={{
@@ -2763,7 +2751,7 @@ class VideoList extends Component {
                   </div>
                 )}
                 {numbDayExercise >= 4 && (
-                  <div>
+                  <div className="day">
                     <a
                       className="nav-link"
                       style={{
@@ -2787,7 +2775,7 @@ class VideoList extends Component {
                   </div>
                 )}
                 {numbDayExercise >= 5 && (
-                  <div>
+                  <div className="day">
                     <a
                       className="nav-link"
                       style={{
@@ -2811,7 +2799,7 @@ class VideoList extends Component {
                   </div>
                 )}
                 {numbDayExercise >= 6 && (
-                  <div>
+                  <div className="day">
                     <a
                       className="nav-link"
                       style={{
@@ -2835,7 +2823,7 @@ class VideoList extends Component {
                   </div>
                 )}
                 {numbDayExercise >= 7 && (
-                  <div>
+                  <div className="day">
                     <a
                       className="nav-link"
                       style={{
