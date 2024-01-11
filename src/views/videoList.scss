@@ -68,12 +68,23 @@
 }
 
 .day-all{
+  padding-top: 20px;
   display: flex;
   align-items: center;
-  justify-content: space-around;
+  padding-left: 16px;
+  padding-right: 16px;
+  width: 100vw; /* กำหนดความกว้างของคอนเทนเนอร์ */
+  overflow-x: auto; /* ทำให้เกิดการ scroll ในแกน X เมื่อเนื้อหาเกินขอบเขตของคอนเทนเนอร์ */
+  overflow-y: hidden; /* ปิดการแสดงผล scroll ในแกน Y (แนวนอน) */
+  white-space: nowrap; /* ป้องกันข้อความขึ้นบรรทัดใหม่ */
+
 }
-.day{
-  width: 85px;
+.day-all::-webkit-scrollbar {
+  width: 0.5em; /* กำหนดความกว้างของแถบ scroll */
+}
+
+.day a {
+  width: 80px !important;
 }
 .page-header{
   height: 40vh;
@@ -559,6 +570,5 @@ input:checked + .slider:before {
   text-align: center;
   display: inline-block;
 }
-
 
 

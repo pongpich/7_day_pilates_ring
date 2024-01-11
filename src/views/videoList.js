@@ -2102,7 +2102,7 @@ class VideoList extends Component {
                       return <option value={number}>Week {number}</option>;
                     })}
                 </select>
-                <nav className="nav">
+                <nav className="nav ">
                   {selectExerciseVideoLastWeek &&
                     selectExerciseVideoLastWeek.length >= 1 && (
                       <div>
@@ -2665,19 +2665,14 @@ class VideoList extends Component {
     return (
       <div className="card-body d-flex justify-content-center">
         <form>
-          <div
-            className="tab-content"
-            id="myTabContent"
-          >
+          <div className="tab-content" id="myTabContent">
             <div
               className="tab-pane fade show active d-flex justify-content-around"
               id="home"
               role="tabpanel"
               aria-labelledby="home-tab"
             >
-              <nav
-                className="day-all"
-              >
+              <nav className="day-all">
                 {numbDayExercise >= 1 && (
                   <div className="day">
                     <a
