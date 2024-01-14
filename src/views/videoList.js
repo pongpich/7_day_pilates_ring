@@ -2284,7 +2284,7 @@ class VideoList extends Component {
                   marginTop: "0.5rem",
                   paddingLeft: "2rem",
                   display: "inline-flex",
-                  width: "20%",
+                  width: "25%",
                 }}
               >
                 Week:
