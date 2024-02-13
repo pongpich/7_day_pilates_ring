@@ -2032,6 +2032,8 @@ class VideoList extends Component {
       showImage,
       numImage,
     } = this.state;
+    const userExpireDate = new Date(this.props.user.expire_date).getTime();
+    const currentDate = new Date().getTime(); //currentDate > userExpired คือหมดอายุ
     const { exerciseVideoLastWeek, all_exercise_activity } = this.props;
 
     const videoUrl = selectedVDO && selectedVDO.url ? `${selectedVDO.url}` : "";
@@ -2507,13 +2509,19 @@ class VideoList extends Component {
                             </div>
                             <div className="mt-3 mb-1 col-lg-8 col-md-11 col-10">
                               <div className="videoItem border shadow">
-                                {this.state.autoPlayCheck ? (
+                              {!(
+                                item.play_time &&
+                                item.duration &&
+                                item.play_time / item.duration >=
+                                  completeVideoPlayPercentage &&
+                                currentDate < userExpireDate
+                              ) ? (
+                                this.state.autoPlayCheck ? (
                                   <img
                                     className="play_button"
                                     src="../assets/img/thumb/play_button2.png"
                                     width="100px"
                                     onClick={() => this.toggleList(index)}
-                                    alt=""
                                   ></img>
                                 ) : (
                                   <img
@@ -2521,9 +2529,9 @@ class VideoList extends Component {
                                     src="../assets/img/thumb/play_button2.png"
                                     width="100px"
                                     onClick={() => this.toggle(item)}
-                                    alt=""
                                   ></img>
-                                )}
+                                )
+                              ) : null}
 
                                 <div className="videoThumb">
                                   <div className="containerThumb">

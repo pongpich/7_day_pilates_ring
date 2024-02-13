@@ -54,10 +54,10 @@ class App extends Component {
     const { statusCheckQuestionnaireLog, statusGetCheckQuestionnaireLog, user, statusInsertQuestionnaireLog, statusGetCheckNewsLog, statusCheckNewsLog, statusInsertNewsLog } = this.props;
     const { statusQuestionnaire, statusNews } = this.state;
 
-    if ((prevState.statusQuestionnaire !== statusQuestionnaire) && (statusQuestionnaire === "done")) {
+    /* if ((prevState.statusQuestionnaire !== statusQuestionnaire) && (statusQuestionnaire === "done")) {
       this.props.insertQuestionnaireLog((user && user.user_id), 'satisfaction_assessment')  //อัพเดทว่าผู้ใช้ทำแบบสอบถามแล้ว
       this.closeToggle('popupQuestionnaire');//ปิด Popup
-    }
+    } */
 
     if ((prevState.statusNews !== statusNews) && (statusNews === "done")) {
       this.props.insertNewsLog((user && user.user_id), 'backup_video_player')  //อัพเดทว่าผู้ใช้เห็นข่าวสารนี้แล้ว
@@ -69,9 +69,9 @@ class App extends Component {
       if (user) {
         week = calculateWeekInProgram(user.start_date);
       }
-      if (!statusCheckQuestionnaireLog && ((week >= 6) && (week <= 8))) {
+      /* if (!statusCheckQuestionnaireLog && ((week >= 6) && (week <= 8))) {
         this.toggle('popupQuestionnaire');
-      }
+      } */
     }
 
     if ((prevProps.statusGetCheckNewsLog !== statusGetCheckNewsLog) && (statusGetCheckNewsLog === 'success')) {
@@ -137,7 +137,7 @@ class App extends Component {
                 </a>
               </li>
             }
-            {
+            {/* {
               ((this.props.user !== null) && (week >= 6 && week <= 8)) &&
               <li className="nav-item">
                 {
@@ -151,7 +151,7 @@ class App extends Component {
                     </div>
                 }
               </li>
-            }
+            } */}
             {
               (this.props.user !== null) &&
               <li className="nav-item">
@@ -187,10 +187,10 @@ class App extends Component {
         showPopupIntro: true
       })
     }
-    if (popupName === "popupQuestionnaire") {
+    /* if (popupName === "popupQuestionnaire") {
       document.getElementById("popupQuestionnaire").classList.toggle("active");
       this.setState({ overlay: true });
-    }
+    } */
     if (popupName === "popupNews") {
       if (document.getElementById("popupNews")) {
         document.getElementById("popupNews").classList.toggle("active");
@@ -232,7 +232,7 @@ class App extends Component {
           <span className="text-header" style={{ fontWeight: "bold" }}>PILATES RING</span>
         </div>
 
-        <div className="popupQuestionnaire" id={`popupQuestionnaire`}>
+        {/* <div className="popupQuestionnaire" id={`popupQuestionnaire`}>
           <div style={{ display: "block" }}>
             <h3 ><b>*แบบประเมินความพึงพอใจและประเมินผลการทำตามโปรแกรม*</b></h3>
             <h3 ><b>(ใช้เวลาประมาณ 5 นาที)</b></h3>
@@ -242,7 +242,7 @@ class App extends Component {
             <a style={{ fontSize: 24, textDecoration: "underline" }} href="https://form.typeform.com/to/fYVxetCs" target="_blank" onClick={() => this.setState({ statusQuestionnaire: "done" })}>ทำแบบสอบถาม</a>
           </div>
           <img alt="" src="./assets/img/thumb/close.png" className="close" onClick={() => this.closeToggle('popupQuestionnaire')}></img>
-        </div>
+        </div> */}
 
         <div className="popupNews" id={`popupNews`}>
           <div style={{ display: "block" }}>
