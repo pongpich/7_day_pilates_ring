@@ -2514,7 +2514,7 @@ class VideoList extends Component {
                                 item.duration &&
                                 item.play_time / item.duration >=
                                   completeVideoPlayPercentage &&
-                                currentDate < userExpireDate
+                                currentDate > userExpireDate
                               ) ? (
                                 this.state.autoPlayCheck ? (
                                   <img
